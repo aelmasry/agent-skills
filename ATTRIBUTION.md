@@ -15,15 +15,26 @@ This repository combines skills from multiple open-source projects with custom a
 
 - **Source:** [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)
 - **License:** MIT
-- **Contents:** 17 curated specialist personas (converted to Cursor skill format)
+- **Contents:** 28 curated specialist personas (converted to Cursor skill format)
 - **Location in this repo:** `skills/` (persona skills)
 - **Conversion:** `scripts/convert-agency-agent.sh`
 
-### career-assistant (Custom)
+### agent-skills (Review Personas)
+
+- **Source:** [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — `agents/` directory
+- **License:** MIT
+- **Contents:** 3 audit personas (`web-performance-auditor`, `security-auditor`, `test-engineer`)
+- **Location in this repo:** `skills/`
+- **Conversion:** `scripts/convert-agent-persona.sh`
+
+### career-branding (Custom)
 
 - **Author:** Ali
-- **Contents:** Resume, LinkedIn, cover letter, and interview preparation workflows
-- **Location in this repo:** `skills/career-assistant/`
+- **Source workspace:** [aelmasry/career-branding](https://github.com/aelmasry/career-branding)
+- **Contents:**
+  - `career-assistant` — lightweight standalone career skill
+  - `career-branding` — full branding workflow with bundled `standards/` from project rules
+- **Location in this repo:** `skills/career-assistant/`, `skills/career-branding/`
 
 ## License
 
