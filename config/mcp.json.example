@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "GitHub": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "Postman": {
+      "url": "https://mcp.postman.com/minimal",
+      "headers": {
+        "Authorization": "Bearer ${POSTMAN_API_KEY}"
+      }
+    },
+    "Apidog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "apidog-mcp-server@latest",
+        "--project-id=${APIDOG_PROJECT_ID}"
+      ],
+      "env": {
+        "APIDOG_ACCESS_TOKEN": "${APIDOG_ACCESS_TOKEN}"
+      }
+    },
+    "trello": {
+      "command": "npx",
+      "args": ["-y", "@delorenj/mcp-server-trello@1.7.1"],
+      "env": {
+        "TRELLO_API_KEY": "${TRELLO_API_KEY}",
+        "TRELLO_TOKEN": "${TRELLO_TOKEN}"
+      }
+    },
+    "servicenow": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@0.1.16",
+        "${SERVICENOW_MCP_URL}"
+      ]
+    }
+  }
+}

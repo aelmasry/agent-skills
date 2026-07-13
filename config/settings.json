@@ -1,0 +1,74 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.fontSize": 17,
+  "tabnine.experimentalAutoImports": true,
+  "workbench.iconTheme": "vscode-icons",
+  "git.autofetch": true,
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "explorer.confirmDelete": false,
+  "redhat.telemetry.enabled": true,
+  "remote.SSH.remotePlatform": {
+    "Techiematter_Production": "linux",
+    "RobinJobs": "linux",
+    "azure_staging": "linux",
+    "Hostinger": "linux",
+    "POS-API-Gateway_Production": "windows",
+    "POS-API-Gateway_Testing": "windows"
+  },
+  "editor.largeFileOptimizations": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "intelephense.codeLens.implementations.enable": true,
+  "intelephense.codeLens.overrides.enable": true,
+  "intelephense.codeLens.parent.enable": true,
+  "intelephense.codeLens.references.enable": true,
+  "intelephense.codeLens.usages.enable": true,
+  "editor.codeLensFontSize": 1,
+  "editor.codeLens": true,
+  "php.referencesCodeLens.enabled": true,
+  "php.codeLens.enabled": true,
+  "javascript.referencesCodeLens.enabled": true,
+  "git.decorations.enabled": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "remote.SSH.useExecServer": false,
+  "remote.SSH.showLoginTerminal": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.confirmSync": false,
+  "window.autoDetectColorScheme": false,
+  "git.replaceTagsWhenPull": true,
+  "workbench.editorAssociations": {
+    "*.sqlite": "default"
+  }
+}

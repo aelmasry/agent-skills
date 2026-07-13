@@ -4,3 +4,7 @@
 *~
 .env
 .env.*
+secrets.env
+.cursor-secrets.env
+config/settings.exported.json
+config/mcp.json

@@ -1,61 +1,162 @@
-# Cursor Skills
+# Cursor Skills — multi-machine sync hub
 
-Global [Cursor](https://cursor.sh) skills for engineering workflows, specialist personas, and career tools.
+Private repo for syncing your full [Cursor](https://cursor.sh) setup across **macOS**, **Ubuntu/Linux**, and **Windows**.
 
-**57 skills** — install once, available in every project via `~/.cursor/skills/`.
+Git is the source of truth for everything Cursor cannot sync by itself: skills, slash commands, prompts, settings, keybindings, extensions manifest, and MCP templates.
 
 ```
 Define → Plan → Build → Verify → Review → Ship
   spec     plan    code    test     review   deploy
 ```
 
-## Quick Install
+## Quick start (any machine)
 
 ```bash
 git clone git@github.com:aelmasry/cursor-skills.git
 cd cursor-skills
-./install.sh
+cp secrets.env.example ~/.cursor-secrets.env   # fill locally — never commit
+chmod 600 ~/.cursor-secrets.env                # macOS / Linux
+./scripts/bootstrap.sh
 ```
 
-Or via HTTPS:
+**Windows (PowerShell):**
+
+```powershell
+git clone git@github.com:aelmasry/cursor-skills.git
+cd cursor-skills
+Copy-Item secrets.env.example $env:USERPROFILE\.cursor-secrets.env
+# edit tokens locally — never commit
+.\scripts\bootstrap.ps1
+```
+
+Then restart Cursor. Enable marketplace **plugins** and complete OAuth (Notion, Figma, Datadog, etc.) on each machine.
+
+## Daily sync workflow
 
 ```bash
-git clone https://github.com/aelmasry/cursor-skills.git
-cd cursor-skills
-./install.sh
+# Machine where you made changes (Mac / Linux / Git Bash)
+./scripts/export.sh
+git add -A && git commit -m "sync cursor config"
+git push
+
+# Other machines
+git pull
+./scripts/bootstrap.sh          # Mac / Linux / Git Bash
+# .\scripts\bootstrap.ps1       # Windows PowerShell
 ```
 
-The install script symlinks all skills to `~/.cursor/skills/` where Cursor auto-discovers them.
+See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
-## What's Included
+## What gets synced
 
-| Category | Count | Source | Purpose |
-|----------|-------|--------|---------|
-| Engineering workflows | 24 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | Spec → ship lifecycle with quality gates |
-| Review & audit personas | 3 | agent-skills `agents/` | Web perf, security audit, test engineering |
-| Specialist personas | 28 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | Domain experts (data, security, branding, PM…) |
-| Career / branding | 2 | custom + [career-branding](https://github.com/aelmasry/career-branding) | Resume, LinkedIn, ATS, interview prep |
-| Shared references | 7 | agent-skills | Checklists (DoD, security, testing, performance…) |
+| Item | Repo path | Installed to |
+|------|-----------|--------------|
+| Skills (57) | `skills/` | `~/.cursor/skills/` (symlinks) |
+| Slash commands | `commands/` | `~/.cursor/commands/` |
+| Prompts | `prompts/` | `~/.cursor/prompts/` |
+| Settings | `config/settings.json` | Cursor User folder (per OS) |
+| Keybindings | `config/keybindings.*.json` | Cursor User folder |
+| Extensions | `config/extensions.txt` | installed via CLI |
+| MCP servers | `config/mcp.json.example` + local secrets | `~/.cursor/mcp.json` |
 
-## Structure
+### Does NOT sync (by design)
+
+- Extension binaries (`~/.cursor/extensions/`)
+- Plugin cache, chats, plans, workspace storage
+- Real MCP tokens (`~/.cursor/mcp.json`, `~/.cursor-secrets.env`)
+- Machine-specific paths (Python interpreter, temp folders)
+
+## Repo structure
 
 ```
 cursor-skills/
-├── skills/                  # One folder per skill
-│   ├── using-agent-skills/          # Meta: pick the right workflow
-│   ├── test-driven-development/     # Engineering workflows (24)
-│   ├── web-performance-auditor/     # Audit personas (3)
-│   ├── cloud-security-architect/    # Agency personas (28)
-│   ├── career-branding/             # Career + branding (2)
-│   └── ...
-├── references/              # Shared checklists for engineering skills
-├── scripts/                 # Conversion helpers
-└── install.sh               # Symlink to ~/.cursor/skills/
+├── skills/                  # 57 global Cursor skills
+├── references/              # Shared engineering checklists
+├── commands/                # Slash commands (/review, /spec, /build…)
+├── prompts/                 # Reusable prompt library
+│   ├── coding/
+│   ├── review/
+│   ├── writing/
+│   └── meta/
+├── config/
+│   ├── settings.json
+│   ├── keybindings.darwin.json
+│   ├── keybindings.linux.json
+│   ├── keybindings.win32.json
+│   ├── extensions.txt
+│   └── mcp.json.example
+├── scripts/
+│   ├── bootstrap.sh         # Install — Mac / Linux / Git Bash
+│   ├── bootstrap.ps1        # Install — Windows PowerShell
+│   ├── export.sh            # Export — Mac / Linux / Git Bash
+│   ├── export.ps1           # Export — Windows PowerShell
+│   ├── platform.sh          # Shared OS detection
+│   └── install.sh           # Skills-only (legacy)
+├── SYNC.md                  # Multi-machine sync guide
+├── MIGRATION.md             # Migration handoff checklist
+└── secrets.env.example      # MCP token template (local only)
 ```
 
-## Engineering Workflows
+## Platform paths
 
-Full development lifecycle from [agent-skills](https://github.com/addyosmani/agent-skills):
+| | macOS | Linux | Windows |
+|---|-------|-------|---------|
+| Cursor config | `~/.cursor/` | `~/.cursor/` | `%USERPROFILE%\.cursor\` |
+| User settings | `~/Library/Application Support/Cursor/User/` | `~/.config/Cursor/User/` | `%APPDATA%\Cursor\User\` |
+| Secrets file | `~/.cursor-secrets.env` | same | `%USERPROFILE%\.cursor-secrets.env` |
+| Bootstrap | `./scripts/bootstrap.sh` | same | `.\scripts\bootstrap.ps1` |
+| Keybindings file | `keybindings.darwin.json` | `keybindings.linux.json` | `keybindings.win32.json` |
+
+**Windows notes:** Enable **Developer Mode** (Settings → System → For developers) so symlinks work without admin. Git Bash can also run `bootstrap.sh`.
+
+## Secrets and security
+
+1. Copy `secrets.env.example` → `~/.cursor-secrets.env` on each machine
+2. Fill tokens locally — **never commit** secrets or real `mcp.json`
+3. `bootstrap` renders `~/.cursor/mcp.json` from the template + secrets
+4. Rotate any token that was ever exposed in chat or logs
+5. This repo is **private** — still treat secrets as machine-local
+
+## Slash commands
+
+| Command | Purpose |
+|---------|---------|
+| `/spec` | Spec-driven development — write SPEC.md before code |
+| `/plan` | Break work into verifiable tasks |
+| `/build` | Incremental implementation (add `auto` for full plan) |
+| `/test` | Test strategy and coverage |
+| `/review` | Five-axis code review |
+| `/audit` | Security-first codebase audit — report first, fix after confirm |
+| `/ship` | Pre-deploy checklist |
+| `/code-simplify` | Refactor without behavior change |
+| `/webperf` | Web performance audit |
+
+## Prompt library
+
+Starter prompts in `prompts/` — reference from chat:
+
+```
+Use the prompt in prompts/review/pr-review.md for these changes.
+```
+
+| Folder | Files |
+|--------|-------|
+| `coding/` | `implement-feature.md`, `debug-issue.md`, `refactor.md` |
+| `review/` | `pr-review.md`, `security-review.md`, `codebase-audit.md` |
+| `writing/` | `adr.md`, `commit-message.md` |
+| `meta/` | `improve-prompt.md`, `task-breakdown.md` |
+
+## What's included — 57 skills
+
+| Category | Count | Source |
+|----------|-------|--------|
+| Engineering workflows | 24 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
+| Review & audit personas | 3 | agent-skills `agents/` |
+| Specialist personas | 28 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
+| Career / branding | 2 | custom + [career-branding](https://github.com/aelmasry/career-branding) |
+| Shared references | 7 | agent-skills checklists |
+
+### Engineering lifecycle
 
 | Phase | Skills |
 |-------|--------|
@@ -67,131 +168,53 @@ Full development lifecycle from [agent-skills](https://github.com/addyosmani/age
 | **Ship** | `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `documentation-and-adrs`, `observability-and-instrumentation`, `shipping-and-launch` |
 | **Meta** | `using-agent-skills` |
 
-## Security (10 skills)
-
-| Skill | Type | Purpose |
-|-------|------|---------|
-| `security-and-hardening` | Workflow | OWASP prevention, input validation, dependency audit |
-| `security-auditor` | Persona | Vulnerability detection, threat modeling |
-| `security-architect` | Persona | Threat modeling, secure-by-design |
-| `application-security-engineer` | Persona | SDLC security, SAST/DAST, secure code review |
-| `cloud-security-architect` | Persona | Zero trust, cloud-native defense (Azure/AWS/GCP) |
-| `penetration-tester` | Persona | Authorized pentests, red team |
-| `incident-responder` | Persona | DFIR, breach investigation |
-| `compliance-auditor` | Persona | SOC 2, ISO 27001, HIPAA, PCI-DSS |
-| `senior-secops-engineer` | Persona | Secrets scanning, secure-by-default |
-| `threat-detection-engineer` | Persona | SIEM rules, threat hunting |
-
-## Career & Branding (2 skills + 7 standards)
-
-From [career-branding](https://github.com/aelmasry/career-branding) workspace:
-
-| Skill | Purpose |
-|-------|---------|
-| `career-branding` | Full branding workflow — resume, LinkedIn, cover letter, interview, thought leadership. Includes bundled `standards/` |
-| `career-assistant` | Lighter standalone version for Data Engineering / Azure / Fabric roles |
-
-Supporting personas:
-
-| Skill | Purpose |
-|-------|---------|
-| `brand-guardian` | Brand identity and consistency |
-| `linkedin-content-creator` | LinkedIn post drafting |
-| `social-media-strategist` | Social media strategy |
-| `content-creator` | General content creation |
-| `developer-advocate` | Developer community and DX content |
-| `recruitment-specialist` | Recruiter-side perspective |
-| `personal-growth-mentor` | Career clarity and accountability |
-
-`career-branding/standards/` includes: core principles, resume, LinkedIn, writing, interview, content, positioning.
-
-## Other Specialist Personas
-
-| Category | Skills |
-|----------|--------|
-| Engineering | `data-engineer`, `backend-architect`, `ai-engineer`, `code-reviewer`, `api-platform-engineer` |
-| Testing | `reality-checker`, `api-tester`, `test-engineer` |
-| Product / PM | `product-manager`, `senior-project-manager` |
-| Design | `ui-designer`, `ux-researcher`, `brand-guardian` |
-| Specialized | `agents-orchestrator`, `mcp-builder`, `web-performance-auditor` |
-
-## Usage
-
-Skills are auto-discovered from `~/.cursor/skills/`. Reference them in your prompt:
+### Usage in chat
 
 ```
 Run code-review-and-quality before we merge.
 Use security-auditor to review this API.
-Audit web performance with web-performance-auditor.
 Review my resume with career-branding.
-Use cloud-security-architect for this Azure deployment.
 ```
 
-### Typical Flows
+### Typical flows
 
 ```
 New feature:  spec-driven-development → incremental-implementation → test-driven-development → code-review-and-quality → shipping-and-launch
-
 Security:     security-and-hardening → security-auditor → cloud-security-architect
-
 Web perf:     web-performance-auditor → performance-optimization
-
 Career:       career-branding → linkedin-content-creator
 ```
 
-### Shared References
-
-Engineering skills load checklists from `references/` (installed as `~/.cursor/skills/references/`):
-
-- `definition-of-done.md` — project-wide quality bar
-- `testing-patterns.md` — test structure and anti-patterns
-- `security-checklist.md` — OWASP, auth, input validation
-- `performance-checklist.md` — Core Web Vitals, profiling
-- `accessibility-checklist.md` — WCAG 2.1 AA
-- `observability-checklist.md` — logging, metrics, tracing
-- `orchestration-patterns.md` — multi-agent coordination rules
-
-## Skills vs Rules
+## Skills vs rules
 
 | | Skills (`~/.cursor/skills/`) | Rules (`.cursor/rules/`) |
 |---|---|---|
 | **Scope** | Global — all projects | Project-specific |
-| **Purpose** | Workflows and specialist personas | Principles and conventions |
-| **This repo** | 57 skills installed globally | Project rules stay in each repo (e.g. career-branding) |
+| **Purpose** | Workflows and personas | Conventions and principles |
+| **This repo** | 57 skills + references | Stay in each project repo |
 
 ## Maintenance
-
-### Add an agency persona
-
-```bash
-git clone https://github.com/msitarzewski/agency-agents.git /tmp/agency-agents-src
-# Edit scripts/add-personas.sh, then:
-bash scripts/add-personas.sh
-./install.sh
-```
-
-### Add an agent-skills persona
-
-```bash
-git clone --depth 1 https://github.com/addyosmani/agent-skills.git /tmp/agent-skills-src
-# Edit scripts/add-agent-personas.sh, then:
-bash scripts/add-agent-personas.sh
-./install.sh
-```
-
-### Update career-branding standards
-
-```bash
-cp /path/to/career-branding/.cursor/rules/*.mdc skills/career-branding/standards/
-cp /path/to/career-branding/.cursor/skills/career-branding/*.md skills/career-branding/
-./install.sh
-```
 
 ### Re-install after pull
 
 ```bash
-git pull
+git pull && ./scripts/bootstrap.sh
+```
+
+Skills-only (legacy):
+
+```bash
 ./install.sh
+```
+
+### Add personas
+
+```bash
+# agency-agents
+bash scripts/add-personas.sh && ./install.sh
+
+# agent-skills personas
+bash scripts/add-agent-personas.sh && ./install.sh
 ```
 
 ## Attribution
