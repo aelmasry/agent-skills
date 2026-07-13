@@ -1,0 +1,18 @@
+# Optional extensions — review before adding to extensions.txt
+# These complement code review, design, and accessibility workflows.
+# Not auto-installed; add IDs you want to config/extensions.txt then bootstrap.
+
+# Accessibility linting in editor
+deque-systems.vscode-axe-linter
+
+# Inline error/warning highlights
+usernamehw.errorlens
+
+# TODO/FIXME overview
+gruntfuggly.todo-tree
+
+# Playwright test authoring (if not using Cursor browser MCP only)
+ms-playwright.playwright
+
+# Design handoff — Figma in editor (you may already use Figma plugin MCP)
+figma.figma-vscode-extension

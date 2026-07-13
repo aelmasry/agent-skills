@@ -15,7 +15,7 @@ This repository combines skills from multiple open-source projects with custom a
 
 - **Source:** [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)
 - **License:** MIT
-- **Contents:** 28 curated specialist personas (converted to Cursor skill format)
+- **Contents:** 34 curated specialist personas (converted to Cursor skill format)
 - **Location in this repo:** `skills/` (persona skills)
 - **Conversion:** `scripts/convert-agency-agent.sh`
 
@@ -35,6 +35,12 @@ This repository combines skills from multiple open-source projects with custom a
   - `career-assistant` — lightweight standalone career skill
   - `career-branding` — full branding workflow with bundled `standards/` from project rules
 - **Location in this repo:** `skills/career-assistant/`, `skills/career-branding/`
+
+### designer-skills (Design prompts — adapted)
+
+- **Source:** [julianoczkowski/designer-skills](https://github.com/julianoczkowski/designer-skills) (MIT)
+- **Contents:** Design workflow prompts adapted for `prompts/design/` (not full skill copies)
+- **Location in this repo:** `prompts/design/`
 
 ## License
 

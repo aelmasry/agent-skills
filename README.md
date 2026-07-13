@@ -51,7 +51,7 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 | Item | Repo path | Installed to |
 |------|-----------|--------------|
-| Skills (57) | `skills/` | `~/.cursor/skills/` (symlinks) |
+| Skills (63) | `skills/` | `~/.cursor/skills/` (symlinks) |
 | Slash commands | `commands/` | `~/.cursor/commands/` |
 | Prompts | `prompts/` | `~/.cursor/prompts/` |
 | Settings | `config/settings.json` | Cursor User folder (per OS) |
@@ -70,13 +70,14 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 ```
 cursor-skills/
-├── skills/                  # 57 global Cursor skills
+├── skills/                  # 63 global Cursor skills
 ├── references/              # Shared engineering checklists
 ├── commands/                # Slash commands (/review, /spec, /build…)
 ├── prompts/                 # Reusable prompt library
 │   ├── coding/
 │   ├── review/
 │   ├── writing/
+│   ├── design/
 │   └── meta/
 ├── config/
 │   ├── settings.json
@@ -127,6 +128,7 @@ cursor-skills/
 | `/test` | Test strategy and coverage |
 | `/review` | Five-axis code review |
 | `/audit` | Security-first codebase audit — report first, fix after confirm |
+| `/design-review` | UI/UX critique with screenshots — hierarchy, a11y, responsive |
 | `/ship` | Pre-deploy checklist |
 | `/code-simplify` | Refactor without behavior change |
 | `/webperf` | Web performance audit |
@@ -145,14 +147,17 @@ Use the prompt in prompts/review/pr-review.md for these changes.
 | `review/` | `pr-review.md`, `security-review.md`, `codebase-audit.md` |
 | `writing/` | `adr.md`, `commit-message.md` |
 | `meta/` | `improve-prompt.md`, `task-breakdown.md` |
+| `design/` | `design-brief.md`, `design-tokens.md`, `design-review.md`, `information-architecture.md` |
 
-## What's included — 57 skills
+Design prompts adapted from [designer-skills](https://github.com/julianoczkowski/designer-skills).
+
+## What's included — 63 skills
 
 | Category | Count | Source |
 |----------|-------|--------|
 | Engineering workflows | 24 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
 | Review & audit personas | 3 | agent-skills `agents/` |
-| Specialist personas | 28 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
+| Specialist personas | 34 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
 | Career / branding | 2 | custom + [career-branding](https://github.com/aelmasry/career-branding) |
 | Shared references | 7 | agent-skills checklists |
 
@@ -183,7 +188,22 @@ New feature:  spec-driven-development → incremental-implementation → test-dr
 Security:     security-and-hardening → security-auditor → cloud-security-architect
 Web perf:     web-performance-auditor → performance-optimization
 Career:       career-branding → linkedin-content-creator
+Design:       design-brief → design-tokens → frontend-ui-engineering → design-review
+Audit:        codebase-audit (Pass 1) → minimal-change-engineer fixes (Pass 2)
 ```
+
+### Highlighted personas (code review & design)
+
+| Skill | Use when |
+|-------|----------|
+| `minimal-change-engineer` | Smallest diff — refuse scope creep on bug fixes |
+| `software-architect` | System design, ADRs, trade-off analysis |
+| `accessibility-auditor` | WCAG 2.2 — keyboard, screen reader, contrast |
+| `performance-benchmarker` | Load testing, Core Web Vitals baselines |
+| `ux-architect` | CSS design systems, layout foundations |
+| `persona-walkthrough-specialist` | Conversion UX — simulate user psychology |
+
+Optional extensions for review/a11y: see `config/recommended-extensions.optional.txt`.
 
 ## Skills vs rules
 
@@ -191,7 +211,7 @@ Career:       career-branding → linkedin-content-creator
 |---|---|---|
 | **Scope** | Global — all projects | Project-specific |
 | **Purpose** | Workflows and personas | Conventions and principles |
-| **This repo** | 57 skills + references | Stay in each project repo |
+| **This repo** | 63 skills + references | Stay in each project repo |
 
 ## Maintenance
 

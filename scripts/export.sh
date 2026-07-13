@@ -16,14 +16,16 @@ echo
 mkdir -p "$REPO_ROOT/config" "$REPO_ROOT/commands" "$REPO_ROOT/prompts"
 
 # Extensions manifest
+EXTENSIONS_FILE="$REPO_ROOT/config/extensions.txt"
 if command -v cursor >/dev/null 2>&1; then
-  cursor --list-extensions > "$REPO_ROOT/config/extensions.txt"
+  cursor --list-extensions > "$EXTENSIONS_FILE"
+  echo "  -> config/extensions.txt ($(wc -l < "$EXTENSIONS_FILE" | tr -d ' ') extensions)"
 elif command -v code >/dev/null 2>&1; then
-  code --list-extensions > "$REPO_ROOT/config/extensions.txt"
+  code --list-extensions > "$EXTENSIONS_FILE"
+  echo "  -> config/extensions.txt ($(wc -l < "$EXTENSIONS_FILE" | tr -d ' ') extensions)"
 else
   echo "Warning: neither cursor nor code CLI found; skipping extensions export" >&2
 fi
-echo "  -> config/extensions.txt ($(wc -l < "$REPO_ROOT/config/extensions.txt" | tr -d ' ') extensions)"
 
 # Slash commands
 if [[ -d "$CURSOR_DIR/commands" ]]; then
