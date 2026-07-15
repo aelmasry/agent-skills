@@ -1,15 +1,18 @@
 ---
 name: career-assistant
 description: >-
-  Reviews resumes, LinkedIn profiles, and cover letters for ATS optimization
-  and recruiter search. Matches profiles to job descriptions for Data
-  Engineering, Microsoft Azure, Microsoft Fabric, and cloud analytics roles.
-  Use when the user asks to review a resume/CV, optimize LinkedIn, write a
-  cover letter, analyze a job description, improve ATS match, or prepare for
-  data engineering interviews.
+  Legacy skill for Data Engineering, Microsoft Azure, Microsoft Fabric, and
+  cloud analytics resume/LinkedIn/cover-letter work. Prefer cv-jd-matcher for
+  AI Engineering, Solutions Architecture, Backend, and Software Architecture
+  JD matching (~90% target), ATS checks, and interview prep. Prefer
+  linkedin-optimizer for profile discoverability and freelance-hunt for gigs.
+  Use this skill when the role is explicitly Data Engineering / Fabric / Azure
+  analytics.
 ---
 
 # Career Assistant
+
+> **Routing:** For AI Engineering / Solutions Architecture / Backend / Software Architecture, use **`cv-jd-matcher`** instead. For LinkedIn profile + visibility, use **`linkedin-optimizer`**. For freelance opportunities, use **`freelance-hunt`**. This skill remains for **Data Engineering / Azure / Fabric** lanes.
 
 ## Primary Goal
 
@@ -196,7 +199,15 @@ For cover letters, adapt the format: use sections 1–6 as analysis, then provid
 
 ---
 
+## Related skills (preferred for non-DE lanes)
+
+| Need | Prefer |
+|------|--------|
+| Align CV + cover letter + ATS + ≤7-day interview plan | `cv-jd-matcher` |
+| Score FT / PT / freelance / client opportunity | `freelance-hunt` |
+| LinkedIn profile + recruiter visibility | `linkedin-optimizer` |
+
 ## Additional Resources
 
 - Step-by-step workflows: [workflows.md](workflows.md)
-- Domain keyword clusters: [keyword-reference.md](keyword-reference.md)
+- Domain keyword clusters (DE / Azure): [keyword-reference.md](keyword-reference.md)

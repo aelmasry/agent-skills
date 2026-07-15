@@ -79,7 +79,10 @@ For document reviews (resume, LinkedIn, cover letter):
 
 ## Related Skills
 
-- `career-assistant` — lighter standalone version focused on Data Engineering / Azure roles
+- `cv-jd-matcher` — align CV to JD, cover letter, ATS, ≤7-day interview prep
+- `freelance-hunt` — opportunity hunt (FT / PT / freelance / potential client)
+- `linkedin-optimizer` — LinkedIn profile + recruiter/client visibility
+- `career-assistant` — legacy Data Engineering / Azure / Fabric lanes
 - `linkedin-content-creator` — LinkedIn post drafting persona
 - `brand-guardian` — personal/professional brand strategy
 - `recruitment-specialist` — recruiter-side perspective

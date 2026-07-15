@@ -51,7 +51,7 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 | Item | Repo path | Installed to |
 |------|-----------|--------------|
-| Skills (63) | `skills/` | `~/.cursor/skills/` (symlinks) |
+| Skills (66) | `skills/` | `~/.cursor/skills/` (symlinks) |
 | Slash commands | `commands/` | `~/.cursor/commands/` |
 | Prompts | `prompts/` | `~/.cursor/prompts/` |
 | Settings | `config/settings.json` | Cursor User folder (per OS) |
@@ -151,15 +151,38 @@ Use the prompt in prompts/review/pr-review.md for these changes.
 
 Design prompts adapted from [designer-skills](https://github.com/julianoczkowski/designer-skills).
 
-## What's included — 63 skills
+## What's included — 66 skills
 
 | Category | Count | Source |
 |----------|-------|--------|
 | Engineering workflows | 24 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
 | Review & audit personas | 3 | agent-skills `agents/` |
 | Specialist personas | 34 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
-| Career / branding | 2 | custom + [career-branding](https://github.com/aelmasry/career-branding) |
+| Career / branding | 5 | `cv-jd-matcher`, `freelance-hunt`, `linkedin-optimizer`, `career-branding`, `career-assistant` |
 | Shared references | 7 | agent-skills checklists |
+
+### Career skills (focused + researched)
+
+| Skill | Use when |
+|-------|----------|
+| `ali-career-profile` | **Always first for Ali** — facts, honesty, achievements |
+| `cv-jd-matcher` | Align CV + cover letter + ≤7-day prep before apply |
+| `build-tailored-resume` | Produce Word `.docx` (SankaiAI) |
+| `resume-tailor-master` | Master-profile ATS tailor + pandoc DOCX (olegvg) |
+| `ats-resume-pipeline` | Gap/ATS/cover/interview agent pipeline (nishil) |
+| `freelance-hunt` | Score FT / PT / freelance / client opportunity |
+| `linkedin-optimizer` | Profile + visibility (+ `rs-linkedin-profile-optimizer`) |
+| `rs-job-description-analyzer` | Extra JD match score / strategy |
+| `rs-interview-prep-generator` | STAR / interview packs |
+| `career-assistant` | Legacy DE/Azure only |
+
+```
+@ali-career-profile     → load facts
+@freelance-hunt         → Go / No-go on role or client
+@cv-jd-matcher          → tailored CV + cover letter + week plan
+@build-tailored-resume  → .docx for ATS portals
+@linkedin-optimizer     → headline / About / skills
+```
 
 ### Engineering lifecycle
 
@@ -187,7 +210,7 @@ Review my resume with career-branding.
 New feature:  spec-driven-development → incremental-implementation → test-driven-development → code-review-and-quality → shipping-and-launch
 Security:     security-and-hardening → security-auditor → cloud-security-architect
 Web perf:     web-performance-auditor → performance-optimization
-Career:       career-branding → linkedin-content-creator
+Career:       freelance-hunt (any opp) → cv-jd-matcher (apply pack) | linkedin-optimizer → linkedin-content-creator
 Design:       design-brief → design-tokens → frontend-ui-engineering → design-review
 Audit:        codebase-audit (Pass 1) → minimal-change-engineer fixes (Pass 2)
 ```
@@ -211,7 +234,7 @@ Optional extensions for review/a11y: see `config/recommended-extensions.optional
 |---|---|---|
 | **Scope** | Global — all projects | Project-specific |
 | **Purpose** | Workflows and personas | Conventions and principles |
-| **This repo** | 63 skills + references | Stay in each project repo |
+| **This repo** | 66 skills + references | Stay in each project repo |
 
 ## Maintenance
 
