@@ -1,6 +1,6 @@
 # Skills catalog
 
-87 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
+88 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
 
 Archived / absorbed skills live in [`_archive/`](_archive/) and are **not** installed.
 
@@ -28,6 +28,7 @@ Start with `using-agent-skills` if you are unsure which one applies. For Ali’s
 | `skill-creator` | Create, edit, and evaluate new skills. |
 | `context-engineering` | Sets up agent context so the session has the right files and facts. |
 | `task-observer` | Logs friction and repeated mistakes so skills can be improved later. |
+| `deep-search` | Exhaustive web research for exact, obscure facts (needle in a haystack). |
 
 ## Define → Plan
 
