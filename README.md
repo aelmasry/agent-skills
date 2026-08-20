@@ -166,41 +166,11 @@ Design prompts adapted from [designer-skills](https://github.com/julianoczkowski
 | Archived (deferred) | 28 | `skills/_archive/` — not auto-installed |
 | Shared references | 7 | agent-skills checklists |
 
+**Full catalog (one-line description for every skill):** [skills/README.md](skills/README.md)
+
 Architecture: [docs/SKILLS_ARCHITECTURE.md](docs/SKILLS_ARCHITECTURE.md) · Matrix: [docs/SKILLS_MATRIX.md](docs/SKILLS_MATRIX.md)
 
 All personal skills live in this repo. `./install.sh` symlinks them into Cursor, Claude Code, and OpenCode (`~/.agents/skills`). Do not keep a second real copy in those dirs.
-
-### Career skills (canonical 6)
-
-| Skill | Use when |
-|-------|----------|
-| `ali-career-profile` | **Always first for Ali** — facts, honesty, achievements |
-| `freelance-hunt` | Score FT / PT / freelance / client opportunity |
-| `cv-jd-matcher` | Align CV + cover letter + ≤7-day prep before apply |
-| `build-tailored-resume` | Produce Word `.docx` (single DOCX / ATS path) |
-| `linkedin-optimizer` | Profile + visibility |
-| `rs-interview-prep-generator` | STAR / interview packs |
-
-```
-@ali-career-profile     → load facts
-@freelance-hunt         → Go / No-go on role or client
-@cv-jd-matcher          → tailored CV + cover letter + week plan
-@build-tailored-resume  → .docx for ATS portals
-@linkedin-optimizer     → headline / About / skills
-@rs-interview-prep-generator → STAR packs
-```
-
-### Engineering lifecycle
-
-| Phase | Skills |
-|-------|--------|
-| **Define** | `interview-me`, `idea-refine`, `spec-driven-development` |
-| **Plan** | `planning-and-task-breakdown` |
-| **Build** | `incremental-implementation`, `test-driven-development`, `frontend-ui-engineering`, `api-and-interface-design`, `context-engineering`, `source-driven-development`, `doubt-driven-development` |
-| **Verify** | `browser-testing-with-devtools`, `debugging-and-error-recovery`, `test-engineer` |
-| **Review** | `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`, `security-auditor` |
-| **Ship** | `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `documentation-and-adrs`, `observability-and-instrumentation`, `shipping-and-launch` |
-| **Meta** | `using-agent-skills`, `find-skills`, `vercel-web-skills` |
 
 ### Usage in chat
 

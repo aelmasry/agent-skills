@@ -110,6 +110,7 @@ ali-career-profile → freelance-hunt → cv-jd-matcher
 
 ## Related docs
 
+- [../skills/README.md](../skills/README.md) — One-line catalog of every active skill
 - [SKILLS_MATRIX.md](SKILLS_MATRIX.md) — Keep / Merge / Drop tables
 - [../SYNC.md](../SYNC.md) — Multi-machine sync
 - [../ATTRIBUTION.md](../ATTRIBUTION.md) — Upstream sources
