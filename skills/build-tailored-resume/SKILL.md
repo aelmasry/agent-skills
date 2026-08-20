@@ -442,3 +442,14 @@ Before inventing content, always load **`ali-career-profile`** (facts + honesty 
 Prefer Ali's persisted profile over generic example data.
 For match scoring + cover letter + 7-day plan without DOCX, also use **`cv-jd-matcher`**.
 DOCX render: install renderer via `install-renderer.sh` or `pip install resume-skill` if CLI missing.
+
+## Absorbed references (Phase-1 merge)
+
+This skill is the single DOCX / ATS tailor path. Use:
+
+- [references/ats-rules.md](references/ats-rules.md) — ATS parsing rules
+- [references/section-templates.md](references/section-templates.md) — section patterns
+- [references/agent-flow.md](references/agent-flow.md) — multi-agent gap/ATS/cover flow
+- [references/pipeline-agents/](references/pipeline-agents/) — optional agent prompts (gap, ATS scorer, cover, interview)
+
+Archived sources: `resume-tailor-master`, `ats-resume-pipeline`, `rs-resume-tailor`, `rs-tech-resume-optimizer` (see `skills/_archive/`).

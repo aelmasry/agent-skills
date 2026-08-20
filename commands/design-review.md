@@ -4,7 +4,8 @@ description: Structured UI/UX design critique against brief — screenshots requ
 
 Use the prompt in `prompts/design/design-review.md`.
 
-Invoke skills: `ui-designer`, `ux-researcher`, `accessibility-auditor`, `frontend-ui-engineering`.
+Invoke skills: `ui-designer`, `accessibility-auditor`, `frontend-ui-engineering`.
+(Do not invoke archived `ux-researcher` — absorbed/deferred; use `ui-designer` + `accessibility-auditor` for UX critique.)
 
 ## Modes
 

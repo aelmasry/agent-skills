@@ -51,7 +51,8 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 | Item | Repo path | Installed to |
 |------|-----------|--------------|
-| Skills (66) | `skills/` | `~/.cursor/skills/` (symlinks) |
+| Skills (active; skips `_archive/`) | `skills/` | `~/.cursor/skills/`, `~/.claude/skills/`, `~/.agents/skills/` (symlinks) |
+| Discussion mode | `DISCUSSION-MODE.md` | `~/.agents/DISCUSSION-MODE.md` |
 | Slash commands | `commands/` | `~/.cursor/commands/` |
 | Prompts | `prompts/` | `~/.cursor/prompts/` |
 | Settings | `config/settings.json` | Cursor User folder (per OS) |
@@ -70,7 +71,8 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 ```
 cursor-skills/
-├── skills/                  # 63 global Cursor skills
+├── skills/                  # Active skills for Cursor + Claude + OpenCode (+ skills/_archive/)
+├── docs/                    # Skills matrix + architecture (ADG)
 ├── references/              # Shared engineering checklists
 ├── commands/                # Slash commands (/review, /spec, /build…)
 ├── prompts/                 # Reusable prompt library
@@ -151,30 +153,33 @@ Use the prompt in prompts/review/pr-review.md for these changes.
 
 Design prompts adapted from [designer-skills](https://github.com/julianoczkowski/designer-skills).
 
-## What's included — 66 skills
+## What's included — active skills
 
 | Category | Count | Source |
 |----------|-------|--------|
 | Engineering workflows | 24 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) |
-| Review & audit personas | 3 | agent-skills `agents/` |
-| Specialist personas | 34 | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
-| Career / branding | 5 | `cv-jd-matcher`, `freelance-hunt`, `linkedin-optimizer`, `career-branding`, `career-assistant` |
+| Meta / discovery | 3 | `using-agent-skills`, `find-skills`, `vercel-web-skills` |
+| Specialist personas (active) | ~16 | [agency-agents](https://github.com/msitarzewski/agency-agents) + audit personas |
+| Career (canonical 6) | 6 | custom + researched pipelines |
+| Azure / Foundry / Entra | ~33 | previously `~/.agents` only; now in this repo |
+| Brand / extras | ~8 | `personal-brand`, `social-content-system`, `analytics-review`, `adaptive-ai-workflow`, `impeccable`, `task-observer`, `owasp-security`, CodeGPT ports |
+| Archived (deferred) | 28 | `skills/_archive/` — not auto-installed |
 | Shared references | 7 | agent-skills checklists |
 
-### Career skills (focused + researched)
+Architecture: [docs/SKILLS_ARCHITECTURE.md](docs/SKILLS_ARCHITECTURE.md) · Matrix: [docs/SKILLS_MATRIX.md](docs/SKILLS_MATRIX.md)
+
+All personal skills live in this repo. `./install.sh` symlinks them into Cursor, Claude Code, and OpenCode (`~/.agents/skills`). Do not keep a second real copy in those dirs.
+
+### Career skills (canonical 6)
 
 | Skill | Use when |
 |-------|----------|
 | `ali-career-profile` | **Always first for Ali** — facts, honesty, achievements |
-| `cv-jd-matcher` | Align CV + cover letter + ≤7-day prep before apply |
-| `build-tailored-resume` | Produce Word `.docx` (SankaiAI) |
-| `resume-tailor-master` | Master-profile ATS tailor + pandoc DOCX (olegvg) |
-| `ats-resume-pipeline` | Gap/ATS/cover/interview agent pipeline (nishil) |
 | `freelance-hunt` | Score FT / PT / freelance / client opportunity |
-| `linkedin-optimizer` | Profile + visibility (+ `rs-linkedin-profile-optimizer`) |
-| `rs-job-description-analyzer` | Extra JD match score / strategy |
+| `cv-jd-matcher` | Align CV + cover letter + ≤7-day prep before apply |
+| `build-tailored-resume` | Produce Word `.docx` (single DOCX / ATS path) |
+| `linkedin-optimizer` | Profile + visibility |
 | `rs-interview-prep-generator` | STAR / interview packs |
-| `career-assistant` | Legacy DE/Azure only |
 
 ```
 @ali-career-profile     → load facts
@@ -182,6 +187,7 @@ Design prompts adapted from [designer-skills](https://github.com/julianoczkowski
 @cv-jd-matcher          → tailored CV + cover letter + week plan
 @build-tailored-resume  → .docx for ATS portals
 @linkedin-optimizer     → headline / About / skills
+@rs-interview-prep-generator → STAR packs
 ```
 
 ### Engineering lifecycle
@@ -192,39 +198,41 @@ Design prompts adapted from [designer-skills](https://github.com/julianoczkowski
 | **Plan** | `planning-and-task-breakdown` |
 | **Build** | `incremental-implementation`, `test-driven-development`, `frontend-ui-engineering`, `api-and-interface-design`, `context-engineering`, `source-driven-development`, `doubt-driven-development` |
 | **Verify** | `browser-testing-with-devtools`, `debugging-and-error-recovery`, `test-engineer` |
-| **Review** | `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`, `web-performance-auditor`, `security-auditor`, `code-reviewer` |
+| **Review** | `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`, `security-auditor` |
 | **Ship** | `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `documentation-and-adrs`, `observability-and-instrumentation`, `shipping-and-launch` |
-| **Meta** | `using-agent-skills` |
+| **Meta** | `using-agent-skills`, `find-skills`, `vercel-web-skills` |
 
 ### Usage in chat
 
 ```
 Run code-review-and-quality before we merge.
 Use security-auditor to review this API.
-Review my resume with career-branding.
+Tailor my resume with build-tailored-resume after cv-jd-matcher.
 ```
 
 ### Typical flows
 
 ```
 New feature:  spec-driven-development → incremental-implementation → test-driven-development → code-review-and-quality → shipping-and-launch
-Security:     security-and-hardening → security-auditor → cloud-security-architect
-Web perf:     web-performance-auditor → performance-optimization
-Career:       freelance-hunt (any opp) → cv-jd-matcher (apply pack) | linkedin-optimizer → linkedin-content-creator
+Security:     security-and-hardening → security-architect / application-security-engineer → security-auditor
+Web perf:     performance-optimization (CWV / load-test modes)
+Career:       ali-career-profile → freelance-hunt → cv-jd-matcher → build-tailored-resume | linkedin-optimizer
 Design:       design-brief → design-tokens → frontend-ui-engineering → design-review
 Audit:        codebase-audit (Pass 1) → minimal-change-engineer fixes (Pass 2)
+Ecosystem:    find-skills → npx skills add …
 ```
 
-### Highlighted personas (code review & design)
+### Highlighted personas (active)
 
 | Skill | Use when |
 |-------|----------|
 | `minimal-change-engineer` | Smallest diff — refuse scope creep on bug fixes |
 | `software-architect` | System design, ADRs, trade-off analysis |
 | `accessibility-auditor` | WCAG 2.2 — keyboard, screen reader, contrast |
-| `performance-benchmarker` | Load testing, Core Web Vitals baselines |
-| `ux-architect` | CSS design systems, layout foundations |
-| `persona-walkthrough-specialist` | Conversion UX — simulate user psychology |
+| `ui-designer` | Visual design intent |
+| `reality-checker` | Evidence-based readiness |
+
+Deferred specialists (pentest, marketing, etc.) live in `skills/_archive/`.
 
 Optional extensions for review/a11y: see `config/recommended-extensions.optional.txt`.
 
@@ -234,7 +242,7 @@ Optional extensions for review/a11y: see `config/recommended-extensions.optional
 |---|---|---|
 | **Scope** | Global — all projects | Project-specific |
 | **Purpose** | Workflows and personas | Conventions and principles |
-| **This repo** | 66 skills + references | Stay in each project repo |
+| **This repo** | Active skills + `_archive` + references | Stay in each project repo |
 
 ## Maintenance
 
@@ -242,11 +250,7 @@ Optional extensions for review/a11y: see `config/recommended-extensions.optional
 
 ```bash
 git pull && ./scripts/bootstrap.sh
-```
-
-Skills-only (legacy):
-
-```bash
+# Skills-only (Cursor + Claude + OpenCode):
 ./install.sh
 ```
 

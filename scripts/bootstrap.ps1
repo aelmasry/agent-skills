@@ -26,20 +26,38 @@ Write-Host "Bootstrapping Cursor from: $RepoRoot"
 Write-Host "OS: Windows"
 Write-Host ""
 
-# 1) Skills
-$SkillsTarget = Join-Path $CursorDir "skills"
-New-Item -ItemType Directory -Force -Path $SkillsTarget | Out-Null
-Get-ChildItem (Join-Path $RepoRoot "skills") -Directory | ForEach-Object {
-  $dest = Join-Path $SkillsTarget $_.Name
-  if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
-  New-Item -ItemType SymbolicLink -Path $dest -Target $_.FullName | Out-Null
-  Write-Host "  -> $($_.Name)"
+# 1) Skills — Cursor, Claude Code, and OpenCode (~/.agents)
+function Install-Skills([string]$Target, [bool]$WithReferences) {
+  New-Item -ItemType Directory -Force -Path $Target | Out-Null
+  Get-ChildItem (Join-Path $RepoRoot "skills") -Directory | Where-Object { $_.Name -ne "_archive" } | ForEach-Object {
+    $dest = Join-Path $Target $_.Name
+    if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+    New-Item -ItemType SymbolicLink -Path $dest -Target $_.FullName | Out-Null
+    Write-Host "  -> $($_.Name)"
+  }
+  Get-ChildItem $Target -ErrorAction SilentlyContinue | ForEach-Object {
+    if ($_.Name -eq "references") { return }
+    $canonical = Join-Path $RepoRoot "skills" $_.Name
+    if (-not (Test-Path $canonical)) {
+      Remove-Item $_.FullName -Force -Recurse -ErrorAction SilentlyContinue
+      Write-Host "  removed stale: $($_.Name)"
+    }
+  }
+  if ($WithReferences) {
+    $refsSource = Join-Path $RepoRoot "references"
+    $refsDest = Join-Path $Target "references"
+    if (Test-Path $refsDest) { Remove-Item $refsDest -Recurse -Force }
+    New-Item -ItemType SymbolicLink -Path $refsDest -Target $refsSource | Out-Null
+    Write-Host "  -> references"
+  }
 }
-$refsSource = Join-Path $RepoRoot "references"
-$refsDest = Join-Path $SkillsTarget "references"
-if (Test-Path $refsDest) { Remove-Item $refsDest -Recurse -Force }
-New-Item -ItemType SymbolicLink -Path $refsDest -Target $refsSource | Out-Null
-Write-Host "  -> references"
+
+Write-Host "Skills -> Cursor"
+Install-Skills (Join-Path $CursorDir "skills") $true
+Write-Host "Skills -> Claude Code"
+Install-Skills (Join-Path $env:USERPROFILE ".claude\skills") $false
+Write-Host "Skills -> OpenCode / agents"
+Install-Skills (Join-Path $env:USERPROFILE ".agents\skills") $false
 Write-Host ""
 
 # 2) Commands + prompts

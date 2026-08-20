@@ -296,6 +296,8 @@ function useToggleTask() {
 
 For detailed accessibility requirements and testing tools, see `references/accessibility-checklist.md`.
 
+For CSS design-system / layout foundations (absorbed from `ux-architect`), see [references/css-systems-playbook.md](references/css-systems-playbook.md). Prefer implementing through this skill; use `ui-designer` for visual intent and `accessibility-auditor` for WCAG audits.
+
 ## Common Rationalizations
 
 | Rationalization | Reality |

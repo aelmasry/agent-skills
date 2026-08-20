@@ -85,14 +85,12 @@ If resume or JD is missing, ask once — do not invent.
 - 2–3 requirement → proof mappings
 - No invented metrics
 
-## Related skills
+## Related skills (canonical career path)
 
 - `ali-career-profile` — **load first** for Ali Salem facts + honesty rules
-- `build-tailored-resume` — DOCX Word render after content is tailored
-- `resume-tailor-master` — master-profile visibility system + pandoc DOCX
-- `ats-resume-pipeline` — multi-agent gap / ATS / cover / interview pipeline
 - `freelance-hunt` — triage FT / PT / freelance / client before deep tailor
+- `build-tailored-resume` — DOCX Word render after content is tailored
 - `linkedin-optimizer` — profile / recruiter visibility
-- `rs-interview-prep-generator` / `rs-job-description-analyzer` — Param ResumeSkills helpers
-- `career-branding` — fuller standards library
-- `career-assistant` — legacy Data Engineering / Azure only
+- `rs-interview-prep-generator` — STAR / interview packs
+
+JD scoring extras absorbed from `rs-job-description-analyzer`: [references/jd-analyzer-playbook.md](references/jd-analyzer-playbook.md).

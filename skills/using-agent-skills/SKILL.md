@@ -11,10 +11,17 @@ Agent Skills is a collection of engineering workflow skills organized by develop
 
 ## Skill Discovery
 
-When a task arrives, identify the development phase and apply the corresponding skill:
+When a task arrives, identify the development phase **or domain** and apply the corresponding skill:
 
 ```
 Task arrives
+    │
+    ├── Looking for an external/ecosystem skill? → find-skills
+    ├── React/Next.js Vercel rule packs? ───────→ vercel-web-skills
+    ├── Ali career / CV / LinkedIn / JD? ───────→ Career path (below)
+    ├── Azure / Foundry / Entra / AKS? ─────────→ ali-engineering-workflow
+    │                                              (+ azure-* in ~/.agents/skills)
+    ├── Architecture / role lens? ──────────────→ Personas (below)
     │
     ├── Don't know what you want yet? ──────→ interview-me
     ├── Have a rough concept, need variants? → idea-refine
@@ -32,6 +39,9 @@ Task arrives
     ├── Reviewing code? ───────────────→ code-review-and-quality
     │   ├── Too complex? ─────────────→ code-simplification
     │   ├── Security concerns? ───────→ security-and-hardening
+    │   │   ├── Threat model / design? → security-architect
+    │   │   ├── AppSec SDLC? ────────→ application-security-engineer
+    │   │   └── Audit report? ───────→ security-auditor
     │   └── Performance concerns? ────→ performance-optimization
     ├── Committing/branching? ─────────→ git-workflow-and-versioning
     ├── CI/CD pipeline work? ──────────→ ci-cd-and-automation
@@ -40,6 +50,51 @@ Task arrives
     ├── Adding logs/metrics/alerts? ───→ observability-and-instrumentation
     └── Deploying/launching? ─────────→ shipping-and-launch
 ```
+
+### Career path (canonical 6)
+
+```
+ali-career-profile → freelance-hunt → cv-jd-matcher
+                   → build-tailored-resume (.docx)
+                   → linkedin-optimizer
+                   → rs-interview-prep-generator
+```
+
+Always load `ali-career-profile` first for Ali Salem work.
+
+### Personas (Layer 3 — thin lenses)
+
+| Need | Skill |
+|------|--------|
+| System design / ADRs | `software-architect` |
+| Backend / data / APIs at scale | `backend-architect`, `api-platform-engineer`, `data-engineer` |
+| AI / ML integration | `ai-engineer` |
+| MCP servers | `mcp-builder` |
+| Product / PM | `product-manager`, `senior-project-manager` |
+| Readiness / evidence | `reality-checker` |
+| QA strategy | `test-engineer` |
+| WCAG | `accessibility-auditor` |
+| Visual UI intent | `ui-designer` |
+| Multi-agent orchestration | `agents-orchestrator` |
+| Smallest possible diff | `minimal-change-engineer` |
+
+### Azure / Domain bridge
+
+For Azure, AKS, Foundry, Entra, App Insights: read `ali-engineering-workflow` (in `~/.agents/skills/`) and the matching `azure-*` / `entra-*` / `microsoft-foundry` skill there. Do not copy Azure skills into this repo.
+
+### Archive
+
+Deferred specialists live under `skills/_archive/` (not auto-installed). Invoke only when the user explicitly asks. Matrix: `docs/SKILLS_MATRIX.md`.
+
+## ADG role mapping
+
+| Role | Skills |
+|------|--------|
+| Orchestrator | this skill, `ali-engineering-workflow`, `agents-orchestrator` |
+| Planner | `interview-me`, `idea-refine`, `spec-driven-development`, `planning-and-task-breakdown`, PM personas |
+| Context Retriever | `context-engineering`, `source-driven-development`, `find-skills`, `ali-career-profile` |
+| Executor | Build lifecycle + Azure domain + `build-tailored-resume` |
+| Reviewer / Auditor | `code-review-and-quality`, security core, `reality-checker`, `doubt-driven-development`, `accessibility-auditor` |
 
 ## Core Operating Behaviors
 
@@ -189,3 +244,12 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 | Ship | documentation-and-adrs | Document the why, not just the what |
 | Ship | observability-and-instrumentation | Structured logs, RED metrics, traces, symptom-based alerts |
 | Ship | shipping-and-launch | Pre-launch checklist, monitoring, rollback plan |
+| Meta | using-agent-skills | Discover and route skills (this skill) |
+| Meta | find-skills | Search/install ecosystem skills via `npx skills` |
+| Meta | vercel-web-skills | Bridge to vercel-labs React/web packages |
+| Career | ali-career-profile | Master facts + honesty gate |
+| Career | freelance-hunt | Opportunity scoring |
+| Career | cv-jd-matcher | JD match + apply pack |
+| Career | build-tailored-resume | DOCX pipeline |
+| Career | linkedin-optimizer | Profile SEO |
+| Career | rs-interview-prep-generator | STAR / interview packs |

@@ -316,6 +316,25 @@ npx lhci autorun
 
 For detailed performance checklists, optimization commands, and anti-pattern reference, see `references/performance-checklist.md`.
 
+## Mode: Web performance audit (CWV)
+
+When the user asks for a UI / Core Web Vitals audit (formerly `web-performance-auditor`):
+
+1. Measure LCP, INP, CLS against the targets above.
+2. Inspect loading, rendering, and network waterfalls.
+3. Rank fixes by impact; verify with before/after numbers.
+
+Playbook: [references/web-performance-auditor-playbook.md](references/web-performance-auditor-playbook.md).
+
+## Mode: Load testing / baselines
+
+When the user asks for load testing or performance baselines (formerly `performance-benchmarker`):
+
+1. Define SLOs and representative scenarios.
+2. Establish a baseline under controlled load.
+3. Compare after changes; guard with CI budgets when available.
+
+Playbook: [references/load-testing-playbook.md](references/load-testing-playbook.md).
 
 ## Common Rationalizations
 

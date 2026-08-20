@@ -22,14 +22,14 @@ description: >-
 5. Hand off DOCX generation to `build-tailored-resume` when Ali wants a Word file.
 6. For opportunity triage (FT/PT/freelance/client) use `freelance-hunt` then this profile + `cv-jd-matcher`.
 
-## Related skills
+## Related skills (canonical career path)
 
 | Need | Skill |
 |------|--------|
-| Score opp before apply | `freelance-hunt` / `rs-job-description-analyzer` |
+| Score opp before apply | `freelance-hunt` |
 | Match CV + cover letter + 7-day plan | `cv-jd-matcher` |
 | DOCX Word output | `build-tailored-resume` |
-| Deep ATS / master-profile variants | `resume-tailor-master` |
-| Honesty pipeline + interview from JD | `ats-resume-pipeline` |
-| LinkedIn | `linkedin-optimizer` (+ `rs-linkedin-profile-optimizer`) |
-| Interview STAR bank | `rs-interview-prep-generator` / `cv-jd-matcher` prep pack |
+| LinkedIn | `linkedin-optimizer` |
+| Interview STAR bank | `rs-interview-prep-generator` |
+
+Architecture: [docs/SKILLS_MATRIX.md](../../docs/SKILLS_MATRIX.md).

@@ -1,6 +1,7 @@
 # Information architecture — structure before pixels
 
-Use skills: `ux-researcher`, `ux-architect`, `product-manager`.
+Use skills: `product-manager`, `ui-designer`, `software-architect`.
+(Do not invoke archived `ux-researcher` or `ux-architect`.)
 
 Define navigation, content hierarchy, and user flows before visual design or code.
 

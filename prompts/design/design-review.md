@@ -1,6 +1,7 @@
 # Design review — structured UI critique
 
-Use skills: `ui-designer`, `ux-researcher`, `accessibility-auditor`, `frontend-ui-engineering`.
+Use skills: `ui-designer`, `accessibility-auditor`, `frontend-ui-engineering`.
+(Do not invoke archived `ux-researcher`.)
 
 Critique what was built against the design brief. **Screenshots are mandatory** — code review alone is not enough.
 

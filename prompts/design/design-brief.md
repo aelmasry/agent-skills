@@ -1,6 +1,7 @@
 # Design brief — from idea to structured direction
 
-Use skills: `idea-refine`, `ux-researcher`, `ui-designer`, `spec-driven-development`.
+Use skills: `idea-refine`, `ui-designer`, `product-manager`, `spec-driven-development`.
+(Do not invoke archived `ux-researcher`.)
 
 Turn a vague idea into a brief developers and designers can build from. Explore the existing codebase first — respect what already exists.
 

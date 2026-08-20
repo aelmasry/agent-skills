@@ -1,6 +1,7 @@
 # Design tokens — light/dark system before building UI
 
-Use skills: `ui-designer`, `frontend-ui-engineering`, `ux-architect`.
+Use skills: `ui-designer`, `frontend-ui-engineering`.
+(Do not invoke archived `ux-architect`.)
 
 Generate a token system **before** building components. Extend existing tokens — do not replace without asking.
 

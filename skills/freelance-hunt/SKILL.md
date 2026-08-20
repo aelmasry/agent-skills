@@ -77,4 +77,6 @@ Optimize for: fit to AI / Architecture / Backend positioning, seriousness of cou
 
 - `cv-jd-matcher` — after Go on a job/contract with a JD: tailor CV, cover letter, week plan
 - `linkedin-optimizer` — inbound visibility (jobs + clients)
-- `career-branding` — deeper writing standards
+- `ali-career-profile` — facts + honesty gate before any apply pack
+- `build-tailored-resume` — DOCX after content is ready
+- `rs-interview-prep-generator` — STAR packs

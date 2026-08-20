@@ -5,7 +5,7 @@ description: >-
   Experience, Skills, Featured — plus a light visibility plan and freelance
   consulting CTA. Use when the user asks to improve LinkedIn profile, branding,
   recruiter search visibility, Open to Work / Services positioning, or inbound
-  freelance discovery. Prefer linkedin-content-creator for full post drafts.
+  freelance discovery.
 ---
 
 # LinkedIn Optimizer
@@ -37,7 +37,7 @@ Optimize for reputation and relevance — not vanity likes.
 3. **Rewrite sections** — Copy-ready Headline (2 options), About, current-role bullets, Top 3 Skills to pin
 4. **Featured strategy** — 2–3 high-signal items (case study, repo, article, cert)
 5. **Freelance signal** — Clear consulting CTA if freelance-first (Services + About last line)
-6. **Visibility plan** — Max **2 posts/week**; use [visibility-checklist.md](visibility-checklist.md). For full post drafts, hand off to `linkedin-content-creator`
+6. **Visibility plan** — Max **2 posts/week**; use [visibility-checklist.md](visibility-checklist.md). Draft short post topics here; full calendars live in archived marketing skills if needed.
 
 ## Non-negotiable rules
 
@@ -60,9 +60,17 @@ Optimize for reputation and relevance — not vanity likes.
 9. What changed and why
 ```
 
-## Related skills
+## Absorbed references (Phase-1 merge)
 
-- `linkedin-content-creator` — full post / carousel drafts with hooks
+- [references/rs-linkedin-playbook.md](references/rs-linkedin-playbook.md) — searchability playbook
+- [references/branding-standards/](references/branding-standards/) — resume / LinkedIn / writing standards
+- [references/keyword-reference.md](references/keyword-reference.md) — keyword bank
+- [references/branding-workflows.md](references/branding-workflows.md) — branding workflows
+
+## Related skills (canonical career path)
+
+- `ali-career-profile` — facts + honesty
 - `cv-jd-matcher` — when a job JD needs a tailored CV
 - `freelance-hunt` — scoring a specific gig after inbound
-- `brand-guardian` — broader brand system (use sparingly; keep technical voice)
+- `build-tailored-resume` — DOCX for applications
+- `rs-interview-prep-generator` — STAR packs

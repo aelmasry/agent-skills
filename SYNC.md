@@ -6,7 +6,7 @@ One **private** repo, any number of machines. Git is the source of truth for eve
 
 | Item | How | macOS | Linux | Windows |
 |------|-----|-------|-------|---------|
-| Skills | symlink | `~/.cursor/skills/` | same | `%USERPROFILE%\.cursor\skills\` |
+| Skills | symlink | `~/.cursor/skills/`, `~/.claude/skills/`, `~/.agents/skills/` | same | `%USERPROFILE%\.cursor\skills\`, `.claude\skills\`, `.agents\skills\` |
 | Slash commands | symlink | `~/.cursor/commands/` | same | `%USERPROFILE%\.cursor\commands\` |
 | Prompts | symlink | `~/.cursor/prompts/` | same | `%USERPROFILE%\.cursor\prompts\` |
 | Settings | copy | `~/Library/Application Support/Cursor/User/` | `~/.config/Cursor/User/` | `%APPDATA%\Cursor\User\` |

@@ -1,0 +1,115 @@
+{
+  "candidate_level": "senior_ic",
+  "target_role": "Senior Full Stack Engineer",
+  "target_company": "Hire Feed",
+  "section_order": ["header", "summary", "skills", "experience", "education", "certifications"],
+  "header": {
+    "name": "Ali Salem",
+    "email": "ali.abdulhafez@gmail.com",
+    "phone": "+971 501379545",
+    "location": "Dubai, UAE (Remote)",
+    "linkedin": "https://linkedin.com/in/alielsayedsalem",
+    "github": "https://github.com/aelmasry",
+    "website": ""
+  },
+  "summary": "Senior Full Stack Engineer with 15+ years designing and shipping scalable applications across React, TypeScript, Node.js, and modern backends. Strong track record building RESTful APIs, microservices, and database layers (MongoDB, PostgreSQL, MySQL) with CI/CD and Docker on AWS and Azure. Comfortable owning end-to-end delivery remotely — from performance optimization and testing (Jest, Mocha, Cypress) to code review — and accelerating work with Cursor across implementation, debugging, and documentation.",
+  "skills": {
+    "core": ["JavaScript", "TypeScript", "Node.js", "React", "Next.js", "RESTful APIs", "Microservices", "Python"],
+    "tools": ["Express.js", "MongoDB", "PostgreSQL", "MySQL", "Redis", "Docker", "GitHub Actions", "AWS", "Azure", "Flask"],
+    "methods": ["CI/CD", "Automated Testing", "Jest", "Mocha", "Cypress", "Code Review", "Performance Optimization", "Agile"],
+    "domains": ["Full-Stack Delivery", "Remote Collaboration", "FinTech Payments", "AI-Assisted Engineering"]
+  },
+  "experience": [
+    {
+      "title": "Senior Full Stack & Solutions Architect",
+      "company": "Seddiqi Holding",
+      "location": "Dubai, UAE",
+      "dates": "2025 – Present",
+      "bullets": [
+        "Design and ship scalable full-stack applications on MERN and PHP/Laravel, improving system performance by 20% through microservices boundaries and optimized MongoDB queries.",
+        "Build and maintain RESTful APIs with CI/CD via GitHub Actions and Docker, cutting deployment cycles by 30% for business-critical services on cloud infrastructure.",
+        "Own code quality across the stack — reviews, debugging, and release reliability — while collaborating with cross-functional stakeholders on delivery priorities."
+      ],
+      "links": []
+    },
+    {
+      "title": "Senior Full Stack & Tech Lead",
+      "company": "Techiematter",
+      "location": "Dubai, UAE / Remote",
+      "dates": "2024",
+      "bullets": [
+        "Architected React, Node.js, and TypeScript applications with REST and GraphQL APIs, lifting performance 20% via service design and MongoDB query optimization.",
+        "Led 5 engineers in remote Agile delivery using Jira, owning implementation decisions, code reviews, and client-aligned full-stack releases.",
+        "Hardened quality with Jest and Cypress test coverage while shipping Dockerized deployments through GitHub Actions."
+      ],
+      "links": []
+    },
+    {
+      "title": "Technical Lead",
+      "company": "Serv5 Group",
+      "location": "Dubai, UAE",
+      "dates": "2023",
+      "bullets": [
+        "Built fintech full-stack backends with Node.js and MongoDB — real-time processing, queue-based workflows, and high-availability APIs for production traffic.",
+        "Improved system performance by 25% through microservices adoption and cut query latency 15% with schema and index tuning.",
+        "Drove automated testing and peer review standards (PHPUnit pipelines), reducing production bugs by 40%."
+      ],
+      "links": []
+    },
+    {
+      "title": "Principal Software Engineer",
+      "company": "Roqay",
+      "location": "Kuwait",
+      "dates": "2020",
+      "bullets": [
+        "Delivered a high-traffic payments platform end-to-end — gateway integrations, order-processing queues, MySQL optimization, and React/Redux client workflows.",
+        "Operated Dockerized AWS deployments with production monitoring, sustaining 99.9% uptime under real-money transaction load.",
+        "Designed database and API layers that stayed reliable as traffic and payment volumes scaled."
+      ],
+      "links": []
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Lamha",
+      "location": "Dubai, UAE",
+      "dates": "2021",
+      "bullets": [
+        "Redesigned full-stack architecture and database access paths, increasing application performance by 20% and reducing server load.",
+        "Partnered with product and engineering peers to ship features aligned to user-facing delivery goals."
+      ],
+      "links": []
+    },
+    {
+      "title": "Earlier Full Stack Roles",
+      "company": "OlaHub, Starware Group, Unifonic, and others",
+      "location": "MENA / Remote",
+      "dates": "2006 – 2018",
+      "bullets": [
+        "Senior Engineer and Tech Lead roles delivering large-scale React, Node.js, and PHP applications with distributed Agile teams across time zones."
+      ],
+      "links": []
+    }
+  ],
+  "projects": [],
+  "education": [
+    {
+      "school": "M.Sc. Computer Sciences and Business",
+      "location": "",
+      "dates": "2003",
+      "degree": "Master's degree",
+      "details": []
+    }
+  ],
+  "certifications": [
+    "Project Management Professional Diploma, The Regional IT Institute (RITI), 2016",
+    "Agile Project Management, Lynda, 2016",
+    "Scrum Master Workshop, Agile Arena, 2017"
+  ],
+  "awards": [],
+  "metadata": {
+    "page_target": "one_page",
+    "tone": "modern_professional",
+    "ats_focus": true,
+    "humanization_pass_complete": true
+  }
+}

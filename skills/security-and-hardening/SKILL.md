@@ -452,6 +452,18 @@ For detailed security checklists and pre-commit verification steps, see `referen
 - LLM/model output passed into a query, the DOM, a shell, or `eval`
 - Secrets, PII, or the full system prompt placed inside an LLM context window
 
+## Automatic secrets scan (SecOps defaults)
+
+Before reviewing or writing security-sensitive code, scan for:
+
+1. **Hardcoded secrets** — passwords, API keys, tokens, private key blocks, cloud key patterns.
+2. **Insecure fallbacks** — `process.env.X || "secret"` style defaults; fail closed instead.
+3. **Credentialized connection strings** in source.
+
+Remediate Critical findings before other work. Checklist: [references/secrets-scan-checklist.md](references/secrets-scan-checklist.md).
+
+For design-level threat modeling use `security-architect`. For AppSec SDLC reviews use `application-security-engineer`. For audit reporting use `security-auditor`.
+
 ## Verification
 
 After implementing security-relevant code:
