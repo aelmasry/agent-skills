@@ -46,13 +46,12 @@ This repository combines skills from multiple open-source projects with custom a
 - **agent-skills packages:** [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) — referenced by thin bridge `skills/vercel-web-skills/` (not fully vendored; install via `npx skills add`)
 - **CLI / registry:** https://skills.sh/
 
-### Superpowers (agentic development methodology)
+### Superpowers (obra/superpowers) — partial
 
 - **Source:** [obra/superpowers](https://github.com/obra/superpowers)
 - **License:** MIT
-- **Contents:** 14 workflow skills (brainstorm → plan → subagent execution → strict TDD → review → finish)
-- **Location:** `skills/` (vendored via `packages/superpowers/` + `scripts/vendor-external-skills.sh`)
-- **Note:** Superpowers TDD vendored as `superpowers-test-driven-development` to avoid collision with agent-skills `test-driven-development`
+- **Contents:** Only `using-git-worktrees` — other Superpowers skills duplicate our lifecycle stack and are skipped by `vendor-external-skills.sh`
+- **Location:** `skills/using-git-worktrees/` (vendored via `packages/superpowers/`)
 
 ### delegate-skills (multi-CLI delegation)
 

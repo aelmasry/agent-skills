@@ -17,7 +17,6 @@ When a task arrives, identify the development phase **or domain** and apply the 
 Task arrives
     │
     ├── Looking for an external/ecosystem skill? → find-skills
-    ├── Superpowers full workflow (brainstorm→plan→subagents)? → using-superpowers
     ├── Delegate to another CLI (Codex, Cursor, OpenCode…)? → *-delegate / delegate-setup
     ├── Two-model PR review or babysit rounds? → debate-review / babysit-pr
     ├── React/Next.js Vercel rule packs? ───────→ vercel-web-skills
@@ -47,6 +46,7 @@ Task arrives
     │   │   └── Audit report? ───────→ security-auditor
     │   └── Performance concerns? ────→ performance-optimization
     ├── Committing/branching? ─────────→ git-workflow-and-versioning
+    │   └── Isolated feature workspace? → using-git-worktrees
     ├── CI/CD pipeline work? ──────────→ ci-cd-and-automation
     ├── Deprecating/migrating? ────────→ deprecation-and-migration
     ├── Writing docs/ADRs? ───────────→ documentation-and-adrs

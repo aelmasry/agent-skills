@@ -1,10 +1,10 @@
 # Skills catalog
 
-122 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
+109 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
 
 Archived / absorbed skills live in [`_archive/`](_archive/) and are **not** installed.
 
-External packages (Superpowers, delegate-skills, review-skills): [docs/EXTERNAL_SKILLS.md](../docs/EXTERNAL_SKILLS.md)
+External packages (delegate-skills, review-skills, one Superpowers skill): [docs/EXTERNAL_SKILLS.md](../docs/EXTERNAL_SKILLS.md)
 
 ---
 
@@ -31,29 +31,8 @@ Start with `using-agent-skills` if you are unsure which one applies. For Ali’s
 | `context-engineering` | Sets up agent context so the session has the right files and facts. |
 | `task-observer` | Logs friction and repeated mistakes so skills can be improved later. |
 | `deep-search` | Exhaustive web research for exact, obscure facts (needle in a haystack). |
-| `using-superpowers` | Superpowers bootstrap — invoke skills before acting (see Superpowers section). |
 
-## Superpowers (obra/superpowers)
-
-Start with `using-superpowers`. Strict TDD in this flow: `superpowers-test-driven-development` (general TDD: `test-driven-development`).
-
-| Skill | What it does |
-|-------|----------------|
-| `brainstorming` | Refine design before implementation. |
-| `using-git-worktrees` | Isolated branch and clean test baseline. |
-| `writing-plans` | Bite-sized tasks with file paths and verification. |
-| `executing-plans` | Execute plan in batches with checkpoints. |
-| `subagent-driven-development` | One subagent per task + spec/code review. |
-| `superpowers-test-driven-development` | Iron-law red-green-refactor TDD. |
-| `requesting-code-review` | Review work against the plan. |
-| `receiving-code-review` | Address review feedback systematically. |
-| `finishing-a-development-branch` | Merge, PR, keep, or discard branch. |
-| `systematic-debugging` | Four-phase root-cause debugging. |
-| `verification-before-completion` | Prove fixes before declaring done. |
-| `dispatching-parallel-agents` | Parallel subagent execution. |
-| `writing-skills` | Create and test new skills. |
-
-## Delegate & review (amElnagdy)
+## External — delegate & review (amElnagdy)
 
 | Skill | What it does |
 |-------|----------------|
@@ -89,6 +68,7 @@ Requires Node 18+, `gh`/`glab`, and delegate lanes for review. Details: [EXTERNA
 | `doubt-driven-development` | Adversarial review of non-trivial decisions before they land. |
 | `minimal-change-engineer` | Smallest possible diff — no drive-by refactors. |
 | `git-workflow-and-versioning` | Branching, commits, and versioning for the change. |
+| `using-git-worktrees` | Isolated git worktree / workspace before feature work (from obra/superpowers). |
 
 ## Verify / review / ship
 
