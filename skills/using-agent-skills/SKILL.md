@@ -17,6 +17,9 @@ When a task arrives, identify the development phase **or domain** and apply the 
 Task arrives
     │
     ├── Looking for an external/ecosystem skill? → find-skills
+    ├── Superpowers full workflow (brainstorm→plan→subagents)? → using-superpowers
+    ├── Delegate to another CLI (Codex, Cursor, OpenCode…)? → *-delegate / delegate-setup
+    ├── Two-model PR review or babysit rounds? → debate-review / babysit-pr
     ├── React/Next.js Vercel rule packs? ───────→ vercel-web-skills
     ├── Ali career / CV / LinkedIn / JD? ───────→ Career path (below)
     ├── Azure / Foundry / Entra / AKS? ─────────→ ali-engineering-workflow

@@ -11,3 +11,12 @@ config/mcp.json
 __pycache__/
 *.egg-info/
 skills/build-tailored-resume/renderer/build/
+
+# Local career artifacts — regenerate with build-tailored-resume, do not sync
+output/
+cvs/
+
+# Tooling / env noise
+.qodo/
+**/.venv/
+node_modules/

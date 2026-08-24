@@ -1,0 +1,1 @@
+fe60a1a6c3d6cc7ddb2ed25b5f06f9e193181b25 2026-08-21 22:21:31 +0300 babysit-pr: quote the description (colon broke YAML parse in the skills CLI), add license/compatibility

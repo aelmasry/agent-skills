@@ -72,7 +72,8 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 ```
 cursor-skills/
 ├── skills/                  # Active skills for Cursor + Claude + OpenCode (+ skills/_archive/)
-├── docs/                    # Skills matrix + architecture (ADG)
+├── packages/                # Upstream snapshots (superpowers, delegate-skills, review-skills)
+├── docs/                    # Skills matrix + architecture (ADG) + EXTERNAL_SKILLS.md
 ├── references/              # Shared engineering checklists
 ├── commands/                # Slash commands (/review, /spec, /build…)
 ├── prompts/                 # Reusable prompt library
@@ -163,6 +164,8 @@ Design prompts adapted from [designer-skills](https://github.com/julianoczkowski
 | Career (canonical 6) | 6 | custom + researched pipelines |
 | Azure / Foundry / Entra | ~33 | previously `~/.agents` only; now in this repo |
 | Brand / extras | ~8 | `personal-brand`, `social-content-system`, `analytics-review`, `adaptive-ai-workflow`, `impeccable`, `task-observer`, `owasp-security`, CodeGPT ports |
+| Superpowers | 14 | [obra/superpowers](https://github.com/obra/superpowers) — see [docs/EXTERNAL_SKILLS.md](docs/EXTERNAL_SKILLS.md) |
+| Delegate / review | 20 | [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills), [review-skills](https://github.com/amElnagdy/review-skills) |
 | Archived (deferred) | 28 | `skills/_archive/` — not auto-installed |
 | Shared references | 7 | agent-skills checklists |
 
@@ -190,6 +193,9 @@ Career:       ali-career-profile → freelance-hunt → cv-jd-matcher → build-
 Design:       design-brief → design-tokens → frontend-ui-engineering → design-review
 Audit:        codebase-audit (Pass 1) → minimal-change-engineer fixes (Pass 2)
 Ecosystem:    find-skills → npx skills add …
+Superpowers:  using-superpowers → brainstorming → writing-plans → subagent-driven-development → superpowers-test-driven-development → debate-review
+Delegate:     delegate-setup → cursor-delegate / codex-delegate / opencode-delegate → you review and commit
+PR review:    debate-review → babysit-pr (needs delegate lanes review-main + review-debate)
 ```
 
 ### Highlighted personas (active)

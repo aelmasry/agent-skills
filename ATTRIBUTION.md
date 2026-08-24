@@ -46,6 +46,28 @@ This repository combines skills from multiple open-source projects with custom a
 - **agent-skills packages:** [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) — referenced by thin bridge `skills/vercel-web-skills/` (not fully vendored; install via `npx skills add`)
 - **CLI / registry:** https://skills.sh/
 
+### Superpowers (agentic development methodology)
+
+- **Source:** [obra/superpowers](https://github.com/obra/superpowers)
+- **License:** MIT
+- **Contents:** 14 workflow skills (brainstorm → plan → subagent execution → strict TDD → review → finish)
+- **Location:** `skills/` (vendored via `packages/superpowers/` + `scripts/vendor-external-skills.sh`)
+- **Note:** Superpowers TDD vendored as `superpowers-test-driven-development` to avoid collision with agent-skills `test-driven-development`
+
+### delegate-skills (multi-CLI delegation)
+
+- **Source:** [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills)
+- **License:** MIT
+- **Contents:** 18 skills — orchestrator delegates to Cursor, Claude, Codex, OpenCode, and other implementer CLIs
+- **Location:** `skills/*-delegate`, `skills/delegate-setup`
+
+### review-skills (debate PR review)
+
+- **Source:** [amElnagdy/review-skills](https://github.com/amElnagdy/review-skills)
+- **License:** MIT
+- **Contents:** `debate-review`, `babysit-pr` — requires delegate-skills lanes
+- **Location:** `skills/debate-review`, `skills/babysit-pr`
+
 ## License
 
 This repository is licensed under MIT. See [LICENSE](LICENSE).
