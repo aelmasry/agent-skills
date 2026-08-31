@@ -40,7 +40,7 @@ Read the matching skill before acting.
 | Ecosystem skill search | `find-skills` | `npx skills find` / skills.sh |
 | React/Next Vercel packs | `vercel-web-skills` | Bridge to vercel-labs packages |
 
-Lifecycle workflow skills are canonical in **cursor-skills**; keep `~/.agents` in sync with:
+Lifecycle workflow skills are canonical in **agent-skills**; keep `~/.agents` in sync with:
 
 ```bash
 ./scripts/sync-agents-skills.sh

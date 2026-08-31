@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install cursor-skills globally via symlinks into Cursor, Claude Code,
+# Install agent-skills globally via symlinks into Cursor, Claude Code,
 # and OpenCode-compatible dirs (~/.agents/skills).
 # OpenCode has no skills dir of its own; it loads ~/.claude/skills then ~/.agents/skills.
 set -euo pipefail
@@ -79,7 +79,7 @@ install_codegpt() {
   echo
 }
 
-echo "Installing cursor-skills from: $REPO_ROOT"
+echo "Installing agent-skills from: $REPO_ROOT"
 echo
 
 install_into "$CURSOR_SKILLS" 1

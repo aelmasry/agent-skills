@@ -1,4 +1,4 @@
-# Cursor Skills — multi-machine sync hub
+# Agent Skills — multi-machine sync hub
 
 Private repo for syncing your full [Cursor](https://cursor.sh) setup across **macOS**, **Ubuntu/Linux**, and **Windows**.
 
@@ -12,8 +12,8 @@ Define → Plan → Build → Verify → Review → Ship
 ## Quick start (any machine)
 
 ```bash
-git clone git@github.com:aelmasry/cursor-skills.git
-cd cursor-skills
+git clone git@github.com:aelmasry/agent-skills.git
+cd agent-skills
 cp secrets.env.example ~/.cursor-secrets.env   # fill locally — never commit
 chmod 600 ~/.cursor-secrets.env                # macOS / Linux
 ./scripts/bootstrap.sh
@@ -22,8 +22,8 @@ chmod 600 ~/.cursor-secrets.env                # macOS / Linux
 **Windows (PowerShell):**
 
 ```powershell
-git clone git@github.com:aelmasry/cursor-skills.git
-cd cursor-skills
+git clone git@github.com:aelmasry/agent-skills.git
+cd agent-skills
 Copy-Item secrets.env.example $env:USERPROFILE\.cursor-secrets.env
 # edit tokens locally — never commit
 .\scripts\bootstrap.ps1
@@ -70,7 +70,7 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 ## Repo structure
 
 ```
-cursor-skills/
+agent-skills/
 ├── skills/                  # Active skills for Cursor + Claude + OpenCode (+ skills/_archive/)
 ├── packages/                # Upstream snapshots (superpowers, delegate-skills, review-skills)
 ├── docs/                    # Skills matrix + architecture (ADG) + EXTERNAL_SKILLS.md

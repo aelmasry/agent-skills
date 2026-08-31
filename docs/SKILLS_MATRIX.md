@@ -1,6 +1,6 @@
 # Skills Matrix — Keep / Merge / Drop
 
-Phase-1 audit of the unified matrix: `cursor-skills/skills/` + `~/.agents/skills/`.
+Phase-1 audit of the unified matrix: `agent-skills/skills/` + `~/.agents/skills/`.
 
 Active skills install via `install.sh` / `bootstrap` (skips `skills/_archive/`). Azure/Foundry/Entra and brand skills live in this repo with everything else; tools consume them through symlinks.
 

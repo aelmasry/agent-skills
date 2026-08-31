@@ -1,6 +1,6 @@
 # Skills Architecture
 
-Unified agent skill architecture for Cursor, Claude Code, and OpenCode. Git source of truth is `cursor-skills/skills/`; tool dirs are symlink farms.
+Unified agent skill architecture for Cursor, Claude Code, and OpenCode. Git source of truth is `agent-skills/skills/`; tool dirs are symlink farms.
 
 ---
 
@@ -54,12 +54,12 @@ Slash commands bind to Layer-1 skills only. Personas and Domain skills are invok
 
 ## Source of truth
 
-**One tree:** `cursor-skills/skills/<name>/`. Every tool is a symlink farm pointing at it.
+**One tree:** `agent-skills/skills/<name>/`. Every tool is a symlink farm pointing at it.
 
 | Skill class | Canonical home | Consumers |
 |-------------|----------------|-----------|
-| Lifecycle, career, personas, Azure/Foundry/Entra, brand, extras | `cursor-skills/skills/` | Cursor (`~/.cursor/skills`), Claude (`~/.claude/skills`), OpenCode (`~/.agents/skills` + `~/.claude/skills`) |
-| Archived | `cursor-skills/skills/_archive/` | Not auto-linked. Invoke only from git. |
+| Lifecycle, career, personas, Azure/Foundry/Entra, brand, extras | `agent-skills/skills/` | Cursor (`~/.cursor/skills`), Claude (`~/.claude/skills`), OpenCode (`~/.agents/skills` + `~/.claude/skills`) |
+| Archived | `agent-skills/skills/_archive/` | Not auto-linked. Invoke only from git. |
 | Cursor platform | `~/.cursor/skills-cursor/` | Cursor IDE (managed by Cursor; not in this repo) |
 
 `install.sh` (and `scripts/bootstrap.ps1`) recreates all three symlink farms. Do not keep a second real copy under `~/.agents` or `~/.claude`. OpenCode has no `~/.config/opencode/skills` on purpose — it already reads Claude + agents.

@@ -31,7 +31,7 @@ One **private** repo, any number of machines. Git is the source of truth for eve
 **macOS / Linux / Git Bash:**
 
 ```bash
-cd ~/alisalem/cursor-skills   # or your clone path
+cd ~/alisalem/agent-skills   # or your clone path
 ./scripts/export.sh
 git add -A && git commit -m "sync cursor config"
 git push
@@ -40,7 +40,7 @@ git push
 **Windows PowerShell:**
 
 ```powershell
-cd ~\alisalem\cursor-skills
+cd ~\alisalem\agent-skills
 .\scripts\export.ps1
 git add -A; git commit -m "sync cursor config"; git push
 ```
@@ -64,8 +64,8 @@ Restart Cursor after bootstrap.
 ### macOS / Ubuntu / Linux
 
 ```bash
-git clone git@github.com:aelmasry/cursor-skills.git
-cd cursor-skills
+git clone git@github.com:aelmasry/agent-skills.git
+cd agent-skills
 cp secrets.env.example ~/.cursor-secrets.env
 chmod 600 ~/.cursor-secrets.env
 # edit tokens — never commit
@@ -75,8 +75,8 @@ chmod 600 ~/.cursor-secrets.env
 ### Windows (PowerShell)
 
 ```powershell
-git clone git@github.com:aelmasry/cursor-skills.git
-cd cursor-skills
+git clone git@github.com:aelmasry/agent-skills.git
+cd agent-skills
 Copy-Item secrets.env.example $env:USERPROFILE\.cursor-secrets.env
 # edit tokens — never commit
 .\scripts\bootstrap.ps1

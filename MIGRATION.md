@@ -1,6 +1,6 @@
-# Migration: prompts repo → cursor-skills (handoff)
+# Migration: prompts repo → agent-skills (handoff)
 
-This document captures the full context from planning sessions so you can continue in a new Cursor chat opened on the `cursor-skills` repo.
+This document captures the full context from planning sessions so you can continue in a new Cursor chat opened on the `agent-skills` repo.
 
 ---
 
@@ -8,7 +8,7 @@ This document captures the full context from planning sessions so you can contin
 
 Consolidate **everything Cursor-related** into one repo:
 
-**https://github.com/aelmasry/cursor-skills**
+**https://github.com/aelmasry/agent-skills**
 
 - Skills (already existed — 57 skills)
 - Slash commands
@@ -25,8 +25,8 @@ Consolidate **everything Cursor-related** into one repo:
 
 | Before | After |
 |--------|-------|
-| `prompts` repo (empty, unclear purpose) | `cursor-skills/prompts/` |
-| Skills in repo, config scattered on disk | `cursor-skills/config/` + scripts |
+| `prompts` repo (empty, unclear purpose) | `agent-skills/prompts/` |
+| Skills in repo, config scattered on disk | `agent-skills/config/` + scripts |
 | `~/.agents/skills` copies, no `~/.cursor/skills` symlink | `install.sh` / `bootstrap.sh` symlinks |
 | Manual sync between machines | `export.sh` → git push → `bootstrap.sh` / `bootstrap.ps1` |
 
@@ -36,7 +36,7 @@ Consolidate **everything Cursor-related** into one repo:
 
 ### Done locally (NOT yet pushed to GitHub)
 
-Uncommitted changes in `~/alisalem/cursor-skills`:
+Uncommitted changes in `~/alisalem/agent-skills`:
 
 ```
 ?? SYNC.md
@@ -72,7 +72,7 @@ Uncommitted changes in `~/alisalem/cursor-skills`:
 ## Target repo structure
 
 ```
-cursor-skills/
+agent-skills/
 ├── skills/                    # 57 global Cursor skills
 ├── references/                # Shared checklists
 ├── commands/                  # Slash commands → ~/.cursor/commands
@@ -152,7 +152,7 @@ Cursor **Settings Sync** (same account) for quick settings/extensions baseline �
 
 ### Phase 3 — Ubuntu setup (home machine)
 
-- [ ] `git clone git@github.com:aelmasry/cursor-skills.git`
+- [ ] `git clone git@github.com:aelmasry/agent-skills.git`
 - [ ] `cp secrets.env.example ~/.cursor-secrets.env` and fill tokens
 - [ ] `./scripts/bootstrap.sh`
 - [ ] Re-enable Cursor plugins from marketplace + OAuth
@@ -183,12 +183,12 @@ Cursor **Settings Sync** (same account) for quick settings/extensions baseline �
 
 ## Copy-paste prompt for new Cursor chat
 
-Open the `cursor-skills` repo in Cursor, start a new chat, and paste the block below.
+Open the `agent-skills` repo in Cursor, start a new chat, and paste the block below.
 
 ---
 
 ```
-You are helping me complete the migration of my Cursor setup into this repo: aelmasry/cursor-skills.
+You are helping me complete the migration of my Cursor setup into this repo: aelmasry/agent-skills.
 
 ## Context
 
