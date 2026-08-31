@@ -8,7 +8,9 @@ Vendored upstream skill libraries synced into `skills/` for Cursor, Claude Code,
 | delegate-skills | [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) | 18 | `packages/delegate-skills/VENDOR_VERSION` |
 | review-skills | [amElnagdy/review-skills](https://github.com/amElnagdy/review-skills) | 2 | `packages/review-skills/VENDOR_VERSION` |
 
-**Total external skills installed: 21** (109 active skills in repo overall).
+**Total external skills installed: 21** (111 active skills in repo overall).
+
+Adapted (not auto-vendored) from [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills) (MIT, pin `d2e9487`): `content-matrix`, `social-visuals`. Voice stays `personal-brand`; drafts stay `social-content-system`. Do not install the upstream 17-skill set.
 
 ## Duplicate policy (Superpowers)
 

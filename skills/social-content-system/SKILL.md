@@ -1,12 +1,15 @@
 ---
 name: social-content-system
-description: Produces LinkedIn posts, Instagram carousels/Reel scripts, and cross-posted derivatives from a single source idea, following Ali's personal-brand voice. Use when the user asks to write a post, turn an idea/article/experience into content, plan a content calendar, or repurpose one piece of content across platforms. Always load personal-brand skill first if not already active in context.
+description: Produces LinkedIn posts, Instagram carousels/Reel scripts, and cross-posted derivatives from a single source idea, following Ali's personal-brand voice. Use when the user asks to write a post, turn an idea/article/experience into content, or repurpose one piece of content across platforms. For a month of headlines use content-matrix first. For graphics after a draft use social-visuals. Always load personal-brand skill first if not already active in context.
 ---
 
 # Social Content Production System
 
 Requires `personal-brand` context (voice, positioning, audience, pillars).
 If that skill hasn't been applied yet in this conversation, apply it first.
+
+Need 32 headlines / a month of angles first? Use `content-matrix`, then come
+back here with one cell. Need a graphic after the draft? Use `social-visuals`.
 
 ## Workflow: one idea → multi-platform output
 
@@ -53,8 +56,15 @@ Always show drafts with any open question flagged inline, e.g.
 "[confirm this number before posting]" — never invent stats/data to
 fill gaps.
 
+### Step 6 — Optional visual
+If Ali wants a graphic, carousel images, or a quote card, hand off to
+`social-visuals` with this draft. Do not invent image prompts here.
+
 ## What this skill does NOT do
 - Does not publish anything — output is draft text/scripts only
 - Does not fabricate engagement hooks based on fake urgency or false claims
 - Does not repost the same sentence structure across platforms — every
   platform gets native-feeling content
+- Does not generate a 32-cell idea grid (`content-matrix`) or Gemini/HTML
+  graphics (`social-visuals`)
+- Does not optimize the LinkedIn profile (`linkedin-optimizer`)

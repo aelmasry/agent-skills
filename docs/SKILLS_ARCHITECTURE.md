@@ -106,6 +106,17 @@ ali-career-profile → freelance-hunt → cv-jd-matcher
                    → rs-interview-prep-generator
 ```
 
+## Content path (brand)
+
+```text
+personal-brand → content-matrix          (ideas, optional)
+               → social-content-system   (copy)
+               → social-visuals          (HTML / Gemini, optional)
+               → analytics-review        (after posting)
+```
+
+Profile work stays on the career path. Do not route "write a post" to `linkedin-optimizer`.
+
 ---
 
 ## Related docs

@@ -163,7 +163,7 @@ Design prompts adapted from [designer-skills](https://github.com/julianoczkowski
 | Specialist personas (active) | ~16 | [agency-agents](https://github.com/msitarzewski/agency-agents) + audit personas |
 | Career (canonical 6) | 6 | custom + researched pipelines |
 | Azure / Foundry / Entra | ~33 | previously `~/.agents` only; now in this repo |
-| Brand / extras | ~8 | `personal-brand`, `social-content-system`, `analytics-review`, `adaptive-ai-workflow`, `impeccable`, `task-observer`, `owasp-security`, CodeGPT ports |
+| Brand / extras | ~10 | `personal-brand`, `content-matrix`, `social-content-system`, `social-visuals`, `analytics-review`, `adaptive-ai-workflow`, `impeccable`, `task-observer`, `owasp-security`, CodeGPT ports |
 | Superpowers | 1 | [obra/superpowers](https://github.com/obra/superpowers) — `using-git-worktrees` only (duplicates removed) |
 | Delegate / review | 20 | [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills), [review-skills](https://github.com/amElnagdy/review-skills) |
 | Archived (deferred) | 28 | `skills/_archive/` — not auto-installed |

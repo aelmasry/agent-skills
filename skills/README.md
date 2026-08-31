@@ -1,6 +1,6 @@
 # Skills catalog
 
-109 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
+111 active skills. Source of truth is this folder. Cursor, Claude Code, and OpenCode load them via symlinks (`./install.sh`).
 
 Archived / absorbed skills live in [`_archive/`](_archive/) and are **not** installed.
 
@@ -121,12 +121,14 @@ Always load `ali-career-profile` first.
 
 ## Brand / content
 
-Load `personal-brand` before writing posts.
+Load `personal-brand` before writing posts. Profile SEO is `linkedin-optimizer` (career), not this path.
 
 | Skill | What it does |
 |-------|----------------|
 | `personal-brand` | Ali’s voice, positioning, and audience. |
+| `content-matrix` | 32+ headlines from Ali’s 4 pillars × 8 formats. |
 | `social-content-system` | LinkedIn posts, Instagram carousels/Reels, cross-posting. |
+| `social-visuals` | HTML or Gemini graphics for an already-drafted post. |
 | `analytics-review` | Reviews post metrics and what to double down on. |
 
 ## Azure / Microsoft

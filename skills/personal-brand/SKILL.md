@@ -53,3 +53,8 @@ adoption. Secondary: developers navigating the same AI-Architect transition.
   specifics stay generic unless Ali explicitly approves)
 - Flag anything that reads as generic "AI guru" content — Ali's edge is
   being a real builder, not a commentator
+
+## Related skills
+- Ideas: `content-matrix` → Draft: `social-content-system` → Visual: `social-visuals`
+- After posting: `analytics-review`
+- Profile SEO (not posts): `linkedin-optimizer`

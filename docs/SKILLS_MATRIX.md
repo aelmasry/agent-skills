@@ -42,6 +42,18 @@ Active skills install via `install.sh` / `bootstrap` (skips `skills/_archive/`).
 | `linkedin-optimizer` | Profile SEO |
 | `rs-interview-prep-generator` | STAR packs (rename deferred to Phase 2) |
 
+### Brand / content
+
+| Skill | Role |
+|-------|------|
+| `personal-brand` | Voice + pillars (always first) |
+| `content-matrix` | 32 headlines (adapted from charlie947; Motivational → Builder story) |
+| `social-content-system` | Draft LinkedIn / IG / Reel |
+| `social-visuals` | One visual skill: HTML, whiteboard, branded, carousel, insight-quote |
+| `analytics-review` | After-the-post metrics loop |
+
+Not vendored from charlie947: `voice-builder`, `post-writer`, `post-formatter`, `profile-optimizer`, `hook-generator`, `analytics-dashboard`, `newsletter-voice`, `youtube-thumbnail`, `pinned-comment`, `post-scorer`, `niche-research` (defer).
+
 ### Architecture / product personas
 
 `software-architect`, `backend-architect`, `api-platform-engineer`, `ai-engineer`, `data-engineer`, `mcp-builder`, `product-manager`, `senior-project-manager`, `reality-checker`, `test-engineer`, `accessibility-auditor`, `ui-designer`
@@ -118,7 +130,7 @@ Not auto-routed. Invoke only when the user explicitly asks.
 
 | Layer | Approx count | Location |
 |-------|--------------|----------|
-| Active repo skills | ~87 | `skills/*` (excl. `_archive`) |
+| Active repo skills | ~89 | `skills/*` (excl. `_archive`) |
 | Archived | 28 | `skills/_archive/` |
 | Shared references | 7 | `references/` |
 

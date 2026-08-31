@@ -20,7 +20,8 @@ Task arrives
     ├── Delegate to another CLI (Codex, Cursor, OpenCode…)? → *-delegate / delegate-setup
     ├── Two-model PR review or babysit rounds? → debate-review / babysit-pr
     ├── React/Next.js Vercel rule packs? ───────→ vercel-web-skills
-    ├── Ali career / CV / LinkedIn / JD? ───────→ Career path (below)
+    ├── Ali career / CV / LinkedIn profile / JD? → Career path (below)
+    ├── Write a post / carousel / content ideas? → Content path (below)
     ├── Azure / Foundry / Entra / AKS? ─────────→ ali-engineering-workflow
     │                                              (+ azure-* in ~/.agents/skills)
     ├── Architecture / role lens? ──────────────→ Personas (below)
@@ -64,6 +65,18 @@ ali-career-profile → freelance-hunt → cv-jd-matcher
 ```
 
 Always load `ali-career-profile` first for Ali Salem work.
+
+### Content path (brand)
+
+```
+personal-brand → content-matrix          (32 headlines, optional)
+               → social-content-system   (draft LinkedIn / IG / Reel)
+               → social-visuals          (HTML or Gemini graphic, optional)
+               → analytics-review        (after it is posted)
+```
+
+"Optimize my LinkedIn profile" stays on the career path (`linkedin-optimizer`).
+"Write a LinkedIn post" uses this content path.
 
 ### Personas (Layer 3 — thin lenses)
 
@@ -256,3 +269,8 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 | Career | build-tailored-resume | DOCX pipeline |
 | Career | linkedin-optimizer | Profile SEO |
 | Career | rs-interview-prep-generator | STAR / interview packs |
+| Content | personal-brand | Ali voice before any post |
+| Content | content-matrix | 32 headlines from pillars × formats |
+| Content | social-content-system | Draft LinkedIn / IG / Reel |
+| Content | social-visuals | HTML / Gemini graphics for a draft |
+| Content | analytics-review | Post metrics feedback loop |

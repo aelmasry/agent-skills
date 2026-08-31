@@ -34,6 +34,16 @@ This repository combines skills from multiple open-source projects with custom a
 - **Absorbed / archived:** `career-assistant`, `career-branding`, `resume-tailor-master`, `ats-resume-pipeline`, `rs-resume-tailor`, `rs-tech-resume-optimizer`, `rs-job-description-analyzer`, `rs-linkedin-profile-optimizer` → `skills/_archive/` (unique refs ported into survivors)
 - **Related workspace:** [aelmasry/career-branding](https://github.com/aelmasry/career-branding)
 
+### social-media-skills (Charlie Hills — adapted, not full vendor)
+
+- **Source:** [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills)
+- **License:** MIT
+- **Pin:** commit `d2e948719eafc8ed9e2436357ad18489bb371a81` (2026-08-30)
+- **What we took:** `content-matrix` (pillars × formats ideation) and a merged `social-visuals` from `graphic-designer`, `gemini-carousel`, `gemini-infographic`, `quote-post`
+- **What we did not install:** the other 13 upstream skills (`voice-builder`, `post-writer`, `profile-optimizer`, etc.) — they duplicate `personal-brand`, `social-content-system`, `linkedin-optimizer`, or `analytics-review`
+- **Adaptations:** `personal-brand` instead of `about-me.md`/`voice.md`; Motivational format → Builder story; quote mode is insight-only (no motivational posters); no Cowork `AskUserQuestion` / British-English / Charlie Hills benchmarks; handoff to `social-content-system`
+- **Location:** `skills/content-matrix/`, `skills/social-visuals/`
+
 ### designer-skills (Design prompts — adapted)
 
 - **Source:** [julianoczkowski/designer-skills](https://github.com/julianoczkowski/designer-skills) (MIT)
