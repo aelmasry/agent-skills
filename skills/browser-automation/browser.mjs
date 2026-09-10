@@ -165,6 +165,9 @@ async function acquireSession(id) {
         '--no-first-run',
         '--no-default-browser-check',
         '--headless=new',
+        // opt into software WebGL so headless Chromium doesn't warn about the
+        // deprecated automatic SwiftShader fallback on WebGL/canvas pages
+        '--enable-unsafe-swiftshader',
         'about:blank',
       ],
       { detached: true, stdio: 'ignore' },
@@ -220,7 +223,7 @@ if (sessionMode) {
   browser = await chromium.launch({
     headless: true,
     channel: 'chromium',
-    args: ['--no-sandbox', '--disable-dev-shm-usage'],
+    args: ['--no-sandbox', '--disable-dev-shm-usage', '--enable-unsafe-swiftshader'],
   })
   ctx = await browser.newContext({ locale: 'en-US' })
   page = await ctx.newPage()
@@ -228,9 +231,18 @@ if (sessionMode) {
 
 const consoleMsgs = []
 const failures = []
+/**
+ * Headless Chromium's software-WebGL fallback (SwiftShader) emits deprecation
+ * and context-lost warnings that say nothing about the page under test — they
+ * fire on any page that touches a <canvas>/WebGL context. SwiftShader is opted
+ * into via the launch flags above; these residual lines are pure host noise.
+ */
+const CONSOLE_NOISE = /GroupMarkerNotSet|Automatic fallback to software WebGL|CONTEXT_LOST_WEBGL|Failed to create WebGL|swiftshader/i
 page.on('console', (m) => {
   if (m.type() === 'error' || m.type() === 'warning') {
-    consoleMsgs.push(`[${m.type()}] ${m.text().slice(0, 300)}`)
+    const text = m.text()
+    if (CONSOLE_NOISE.test(text)) return
+    consoleMsgs.push(`[${m.type()}] ${text.slice(0, 300)}`)
   }
 })
 page.on('pageerror', (e) => consoleMsgs.push(`[uncaught] ${String(e).slice(0, 300)}`))

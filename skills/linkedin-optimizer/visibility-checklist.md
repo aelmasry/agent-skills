@@ -9,11 +9,15 @@
 - [ ] Not a stacked list of 4 equal jobs
 - [ ] Keywords recruiters filter: AI, Architecture, Backend as relevant
 
-Formula: `[Primary title] | [Specialty] | [Outcome or domain]`
+Formula (search): `[Primary title] | [Specialty] | [Outcome or domain]`
+
+Optional consulting variant: `[What you do] | [Who you help] [result]` — still one searchable title. See [references/section-rewrite.md](references/section-rewrite.md).
 
 ### About
 
 - [ ] First 2 lines carry keywords (visible before "see more")
+- [ ] Hook is a claim or number, not a question
+- [ ] 7-step shape: hook, role, proof, value, human, specialties, CTA
 - [ ] Proof points from real production work
 - [ ] Architecture / systems thinking tone
 - [ ] **Freelance CTA** last line if consulting-first, e.g.  
@@ -23,6 +27,7 @@ Formula: `[Primary title] | [Specialty] | [Outcome or domain]`
 
 - [ ] Current role has a real description (highest weight)
 - [ ] 3–5 bullets on recent roles; shorter on older
+- [ ] Bullets: action verb + specific metric (or concrete scope if no metric)
 - [ ] Aligns with resume dates/titles
 
 ### Skills
@@ -58,4 +63,5 @@ Rules:
 - Reply in first hour
 - Goal metrics: profile views from ICP, inbound DMs — not likes
 
-For full post writing, use `linkedin-content-creator`.
+Week calendar (still 2 posts max): `content-matrix` Step 5.
+Post drafts: `social-content-system`.

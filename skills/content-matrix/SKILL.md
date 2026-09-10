@@ -2,10 +2,11 @@
 name: content-matrix
 description: >-
   Generates 32+ concrete LinkedIn/Instagram post headlines by pairing Ali's
-  four personal-brand pillars with eight content formats. Use when the user
-  asks for post ideas, a content matrix, what to post this month, or a calendar
-  of angles. Load personal-brand first. Do not use for drafting the post itself
-  (that is social-content-system) or for profile SEO (linkedin-optimizer).
+  four personal-brand pillars with eight content formats, and optionally a
+  7-day 2-post schedule. Use when the user asks for post ideas, a content
+  matrix, what to post this week or month, or a calendar of angles. Load
+  personal-brand first. Do not use for drafting the post itself (that is
+  social-content-system) or for profile SEO (linkedin-optimizer).
 ---
 
 # Content Matrix
@@ -16,7 +17,8 @@ Adapted from [charlie947/social-media-skills](https://github.com/charlie947/soci
 Requires `personal-brand`. If it is not already in context, apply it first.
 
 This skill produces **ideas only**. Drafting is `social-content-system`.
-Graphics are `social-visuals`.
+Graphics are `social-visuals`. Follow repo `DISCUSSION-MODE.md`: matrix or
+week table, not an essay. One question at the end.
 
 ## Step 1 — Lock pillars
 
@@ -81,9 +83,41 @@ Then:
 - Visual → `social-visuals` after the draft exists
 - Do not jump to `linkedin-optimizer` (that is profile SEO, not posts)
 
+## Step 5 — Optional 7-day schedule
+
+Only if Ali asks for "this week", a calendar, or a posting rhythm.
+Do not emit this table unsolicited after a matrix.
+
+Cadence (do not raise unless Ali overrides): **max 2 posts/week**.
+Default Gulf morning: Tue and Thu. Mon = optional comment-only. Fri–Sun off.
+
+Map slots onto Ali's four pillars (do not import Authority / Narrative /
+Community / Product). Do not stack the same pillar two posts in a row.
+Do not reuse the same hook formula twice in 7 days. Hook codes: F1–F20 in
+`social-content-system/references/hook-formulas.md`.
+
+| Day | Time | Pillar | Format | Hook formula | 1-line angle | CTA type |
+|-----|------|--------|--------|--------------|--------------|----------|
+| Mon | — | (comment-only, optional) | — | — | — | — |
+| Tue | ~8:00 AM Gulf | {pillar} | Text | F… | {specific angle} | Question or trade-off |
+| Wed | — | — | — | — | — | — |
+| Thu | ~8:00 AM Gulf | {other pillar} | Text | F… | {specific angle} | Question or trade-off |
+| Fri–Sun | — | (off) | — | — | — | — |
+
+CTA types: specific question | trade-off | none. Never "comment X to get Y".
+
+Short check (one line, not a lecture):
+
+- [ ] 1 receipt/data angle and 1 builder-story angle across the two posts
+- [ ] No confidential Seddiqi / employer detail
+- [ ] Numbers Ali has not confirmed are flagged
+
+Topics and 1-line angles only. Drafting stays `social-content-system`.
+
 ## What this skill does not do
 
 - Does not write the post body
 - Does not generate images
 - Does not use Charlie Hills / Cowork voice files (`about-me.md`, `voice.md`)
 - Does not add a Motivational column (replaced by Builder story)
+- Does not impose 3–5 posts/week or a 10–20 comments/day playbook

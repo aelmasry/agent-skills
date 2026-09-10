@@ -166,6 +166,12 @@ const PRESETS = {
         format: 'unity',
         paths: [unityLogDefault()],
       },
+      // The editor main window title always contains "Unity" (e.g. "My project (2)
+      // - PuzzlePlatformer - Web - Unity 6.5 <DX11>"); the largest visible match
+      // picks the editor over Unity Hub. This is what lets `shot` see Play Mode
+      // instead of the IDE (s04 audit, 2026-09-08: without it, full-screen capture
+      // returned the IDE 4 times out of 4).
+      window: 'Unity',
       sourceRoots: ['Assets'],
     },
   },
@@ -175,6 +181,8 @@ const PRESETS = {
       engine: 'unreal',
       launch: { cmd: '${UE_EDITOR}', args: ['${PROJECT}.uproject'] },
       log: { format: 'unreal', paths: ['Saved/Logs/${NAME}.log'] },
+      // Editor window titles contain "Unreal" ("Unreal Editor" variants).
+      window: 'Unreal',
       sourceRoots: ['Source'],
     },
   },
@@ -825,11 +833,24 @@ function cmdShot() {
   mkdirSync(dirname(out), { recursive: true })
   const title = flag('--window', state?.window ?? null)
   const attempts = []
+  /** Non-fatal diagnostics from a SUCCESSFUL capture (wrong-window risk). */
+  const warnings = []
 
   const tryRun = (bin, args, note) => {
     if (!bin) return false
     const r = spawnSync(bin, args, { encoding: 'utf8' })
-    attempts.push(`${note}: ${r.status === 0 ? 'ok' : (r.stderr || '').trim().slice(0, 120) || `exit ${r.status}`}`)
+    // A ZERO exit can still carry a warning. The Windows capture writes
+    // "could not fully activate the window (foreground lock)" — and the chosen
+    // window title — to stderr while SUCCEEDING, precisely when the frame may
+    // show the wrong window. `attempts` is only printed in the failure branch
+    // below, so those warnings were discarded and the model was handed a frame
+    // it had no reason to distrust. Collect them for the success path too.
+    const warn = (r.stderr || '').trim()
+    if (r.status === 0 && warn) warnings.push(`${note}: ${warn.slice(0, 400)}`)
+    // 400, not 120: window-targeted shot diagnostics include the candidate
+    // window-title list (up to ~600 chars) the model needs to fix its
+    // --window/manifest guess without re-probing with shell commands.
+    attempts.push(`${note}: ${r.status === 0 ? 'ok' : (r.stderr || '').trim().slice(0, 400) || `exit ${r.status}`}`)
     return r.status === 0 && existsSync(out) && statSync(out).size > 0
   }
 
@@ -859,6 +880,11 @@ function cmdShot() {
 
   if (ok) {
     console.log(`wrote ${out}`)
+    // Surfaced on success by design: these say WHICH window was captured, and
+    // whether activation actually landed - neither is inferable from the file.
+    // Printed verbatim: the C# messages carry their own "warning:" where one is
+    // warranted, so a blanket label here would mislabel the informational ones.
+    for (const w of warnings) console.log(`  ${w}`)
     // Readable as of the image-read path (core/engine/image-read.ts): a .png
     // read now returns the picture. Not on every host though — an older
     // extension, or one of the other IDE drivers, still answers with the binary
@@ -878,20 +904,223 @@ function cmdShot() {
   }
 }
 
+// C# source for the window-targeted Windows capture (compiled in-session via
+// Add-Type, shipped base64 so the -Command string stays free of quoting/WSL
+// interop hazards). C# 5 only — the host may be Windows PowerShell 5.1.
+// Two capture strategies, PrintWindow first:
+//   1. PrintWindow(PW_RENDERFULLCONTENT) grabs the window's OWN surface even
+//      when another window is in front — no focus steal, no foreground-lock
+//      fight. Blank-guarded: some GPU/CEF surfaces render empty through it.
+//   2. Fallback is the capsnap.cs dance proven in the field (Zone A audit s04,
+//      2026-09-08: hand-rolled by the model after `shot` returned the IDE 4×):
+//      restore if iconic, AttachThreadInput to the foreground thread,
+//      SetWindowPos(HWND_TOP) + SetForegroundWindow to beat the foreground
+//      lock, then CopyFromScreen of JUST the window rect using DWM extended
+//      frame bounds (no shadow/resize-border fudge).
+// Title matching is case-insensitive substring — same intuition as xdotool
+// search --name — and the LARGEST visible match wins, so "Unity" matches
+// "My project (2) - PuzzlePlatformer - Web - Unity 6.5 <DX11>" and picks the
+// editor main window over Unity Hub. No match = explicit failure listing the
+// other visible window titles, per the honest-failure rule above: a silent
+// full-desktop capture is how an agent confidently describes the wrong thing.
+const WIN_SHOT_CS = `
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+
+public static class GameShot
+{
+  public delegate bool EnumProc(IntPtr h, IntPtr lp);
+  [StructLayout(LayoutKind.Sequential)]
+  public struct RECT { public int Left; public int Top; public int Right; public int Bottom; }
+
+  [DllImport("user32.dll")] public static extern bool EnumWindows(EnumProc cb, IntPtr lp);
+  [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr h);
+  [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetWindowText(IntPtr h, StringBuilder sb, int max);
+  [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr h);
+  [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int cmd);
+  [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr h);
+  [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr h, IntPtr after, int x, int y, int cx, int cy, uint flags);
+  [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr h, IntPtr pid);
+  [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint a, uint b, bool attach);
+  [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h, out RECT r);
+  [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr h, IntPtr hdc, uint flags);
+  [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
+  [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+  [DllImport("dwmapi.dll")] public static extern int DwmGetWindowAttribute(IntPtr h, int attr, out RECT pv, int cb);
+
+  // Returns null on success, else a diagnostic meant for the caller's stderr.
+  public static string Capture(string title, string path)
+  {
+    try { SetProcessDPIAware(); } catch (Exception) {}
+    string needle = (title ?? "").Trim().ToLower();
+    IntPtr best = IntPtr.Zero;
+    long bestArea = -1;
+    string bestTitle = "";
+    StringBuilder others = new StringBuilder();
+    EnumWindows(delegate(IntPtr h, IntPtr lp)
+    {
+      if (!IsWindowVisible(h)) return true;
+      StringBuilder sb = new StringBuilder(512);
+      if (GetWindowText(h, sb, 512) <= 0) return true;
+      string t = sb.ToString();
+      if (t.Length == 0) return true;
+      RECT r;
+      if (needle.Length > 0 && t.ToLower().Contains(needle) && GetWindowRect(h, out r))
+      {
+        long area = ((long)(r.Right - r.Left)) * ((long)(r.Bottom - r.Top));
+        if (area > bestArea) { bestArea = area; best = h; bestTitle = t; }
+      }
+      else if (others.Length < 600) { others.Append(t); others.Append(" | "); }
+      return true;
+    }, IntPtr.Zero);
+    if (best == IntPtr.Zero)
+      return "no visible window title containing [" + title + "]. others: " + others.ToString();
+    // Which window won, ALWAYS - not only in the failure string. The match is
+    // "largest visible title containing the needle", so "Unity" can select a
+    // maximized VS Code window titled "Player.cs - UnityGame - Visual Studio
+    // Code" (bigger than the editor) and the capture then SUCCEEDS on the wrong
+    // window. Naming it is the only way the model can catch that from the
+    // output instead of confidently describing the IDE.
+    Console.Error.WriteLine("captured window: [" + bestTitle + "]");
+    if (IsIconic(best)) { ShowWindow(best, 9); Thread.Sleep(300); }
+    // Sequential, not null-coalescing: a BLANK PrintWindow must still reach
+    // the fallback — blank is exactly the failure the fallback exists to
+    // answer (GPU/CEF surfaces that render empty through PrintWindow). A ??
+    // chain would keep the non-null blank error and never try the screen copy.
+    string printErr = TryPrint(best, path);
+    if (printErr == null) return null;
+    string focusErr = TryFocusAndRect(best, path);
+    if (focusErr == null) return null;
+    return "capture failed for [" + bestTitle + "]: print: " + printErr + "; focus: " + focusErr;
+  }
+
+  static RECT FrameBounds(IntPtr h)
+  {
+    RECT r;
+    if (DwmGetWindowAttribute(h, 9 /* DWMWA_EXTENDED_FRAME_BOUNDS */, out r, Marshal.SizeOf(typeof(RECT))) != 0)
+      GetWindowRect(h, out r);
+    return r;
+  }
+
+  static string TryPrint(IntPtr h, string path)
+  {
+    try
+    {
+      RECT r = FrameBounds(h);
+      int w = r.Right - r.Left, ht = r.Bottom - r.Top;
+      if (w <= 0 || ht <= 0) return "window bounds empty";
+      Bitmap bmp = new Bitmap(w, ht, PixelFormat.Format24bppRgb);
+      Graphics g = Graphics.FromImage(bmp);
+      IntPtr hdc = g.GetHdc();
+      bool ok = PrintWindow(h, hdc, 2 /* PW_RENDERFULLCONTENT */);
+      g.ReleaseHdc(hdc);
+      g.Dispose();
+      if (!ok) { bmp.Dispose(); return "PrintWindow returned false"; }
+      if (IsBlank(bmp)) { bmp.Dispose(); return "PrintWindow rendered blank"; }
+      bmp.Save(path, ImageFormat.Png);
+      bmp.Dispose();
+      return null;
+    }
+    catch (Exception e) { return "PrintWindow: " + e.Message; }
+  }
+
+  static bool IsBlank(Bitmap bmp)
+  {
+    int empty = 0, total = 0;
+    int sx = Math.Max(1, bmp.Width / 24), sy = Math.Max(1, bmp.Height / 24);
+    for (int x = 4; x < bmp.Width; x += sx)
+      for (int y = 4; y < bmp.Height; y += sy)
+      {
+        Color c = bmp.GetPixel(x, y);
+        total++;
+        // RGB ONLY. This used to also count c.A == 0, which made EVERY
+        // PrintWindow capture "blank": the bitmap was Format32bppArgb
+        // (zero-initialised, so A=0) and GDI does not write the alpha byte for
+        // an ordinary non-layered window. Every sampled pixel matched, IsBlank
+        // was always true, TryPrint always reported "rendered blank", and the
+        // code always fell through to the focus-stealing path it exists to
+        // avoid — while the saved PNG was fully transparent. The bitmaps are
+        // Format24bppRgb now (no alpha at all); this clause stays gone so the
+        // check cannot silently depend on the pixel format again.
+        if (c.R == 0 && c.G == 0 && c.B == 0) empty++;
+      }
+    return total > 0 && empty == total;
+  }
+
+  static string TryFocusAndRect(IntPtr h, string path)
+  {
+    try
+    {
+      uint me = GetCurrentThreadId();
+      IntPtr fg = GetForegroundWindow();
+      uint fgThread = (fg != IntPtr.Zero) ? GetWindowThreadProcessId(fg, IntPtr.Zero) : 0;
+      bool attached = (fgThread != 0 && fgThread != me) && AttachThreadInput(me, fgThread, true);
+      try
+      {
+        SetWindowPos(h, (IntPtr)0 /* HWND_TOP */, 0, 0, 0, 0, 3 /* SWP_NOSIZE|SWP_NOMOVE */);
+        SetForegroundWindow(h);
+        // SetForegroundWindow can block for a while if the current foreground
+        // thread is hung (synchronous send, no timeout) and can lose to the
+        // Windows foreground lock — in which case the rect below may contain
+        // the overlapping window's pixels. Capture anyway, but say so: the
+        // model reads the PNG AND this warning and can judge for itself.
+        Thread.Sleep(250);
+        if (GetForegroundWindow() != h)
+          Console.Error.WriteLine("warning: could not fully activate the window (foreground lock); verify the frame actually shows the target window");
+        RECT r = FrameBounds(h);
+        int w = r.Right - r.Left, ht = r.Bottom - r.Top;
+        if (w <= 0 || ht <= 0) return "window bounds empty";
+        Bitmap bmp = new Bitmap(w, ht, PixelFormat.Format24bppRgb);
+        Graphics g = Graphics.FromImage(bmp);
+        g.CopyFromScreen(r.Left, r.Top, 0, 0, new Size(w, ht));
+        g.Dispose();
+        bmp.Save(path, ImageFormat.Png);
+        bmp.Dispose();
+        return null;
+      }
+      finally { if (attached) AttachThreadInput(me, fgThread, false); }
+    }
+    catch (Exception e) { return "screen capture: " + e.Message; }
+  }
+}
+`
+
 function winCaptureScript(out, title) {
-  // Full-screen capture; window-targeted capture on Windows needs P/Invoke that
-  // is not worth the fragility in a first pass.
   const p = out.replace(/'/g, "''")
   const winPath = isWSL()
     ? (spawnSync('wslpath', ['-w', out], { encoding: 'utf8' }).stdout || '').trim() || p
     : p
+  // Single-quoted PS literals treat backslashes LITERALLY — nothing to escape.
+  // The old doubling (\\ → \\\\) survives Win32 collapsing on drive paths but
+  // deterministically breaks UNC saves (\\wsl.localhost\… → GDI+ "generic
+  // error"), which is every WSL capture. Verified empirically on PS 5.1.
+  const psPath = winPath.replace(/'/g, "''")
+  // No window requested: the original whole-screen capture, byte-for-byte.
+  // Everything with a manifest `window` (all presets that launch a window)
+  // takes the targeted path below instead.
+  if (!title || !String(title).trim()) {
+    return [
+      'Add-Type -AssemblyName System.Windows.Forms,System.Drawing;',
+      '$b=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds;',
+      '$bmp=New-Object System.Drawing.Bitmap $b.Width,$b.Height;',
+      '$g=[System.Drawing.Graphics]::FromImage($bmp);',
+      '$g.CopyFromScreen($b.Location,[System.Drawing.Point]::Empty,$b.Size);',
+      `$bmp.Save('${psPath}');`,
+    ].join(' ')
+  }
+  const t = String(title).replace(/'/g, "''")
+  const b64 = Buffer.from(WIN_SHOT_CS, 'utf8').toString('base64')
   return [
-    'Add-Type -AssemblyName System.Windows.Forms,System.Drawing;',
-    '$b=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds;',
-    '$bmp=New-Object System.Drawing.Bitmap $b.Width,$b.Height;',
-    '$g=[System.Drawing.Graphics]::FromImage($bmp);',
-    '$g.CopyFromScreen($b.Location,[System.Drawing.Point]::Empty,$b.Size);',
-    `$bmp.Save('${winPath.replace(/\\/g, '\\\\').replace(/'/g, "''")}');`,
+    "$ErrorActionPreference='Stop';",
+    `$src=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${b64}'));`,
+    'Add-Type -TypeDefinition $src -ReferencedAssemblies System.Drawing;',
+    `$r=[GameShot]::Capture('${t}','${psPath}');`,
+    'if($r){[Console]::Error.WriteLine($r);exit 1}',
   ].join(' ')
 }
 
@@ -966,6 +1195,25 @@ async function cmdRcon(explicit) {
   }
 }
 
+/**
+ * Report a key-send. A ZERO exit does not mean the keys landed where asked:
+ * AppActivate matches exact/prefix/suffix only, so a mid-title needle ("Unity"
+ * against "My project - … - Unity 6.5") misses silently and the keystrokes go
+ * to whatever holds focus — and with Unity Hub open it can activate the HUB.
+ * The warning for that is written to stderr while the command still succeeds,
+ * so printing stderr only on failure hid precisely the case it exists for, and
+ * the model was told "sent: Escape" regardless.
+ */
+function reportKeys(r, keys) {
+  if (r.status !== 0) {
+    console.log(`failed: ${(r.stderr || '').trim()}`)
+    return
+  }
+  console.log(`sent: ${keys}`)
+  const warn = (r.stderr || '').trim()
+  if (warn) console.log(`  warning: ${warn}`)
+}
+
 function cmdKey() {
   const state = readState()
   const title = flag('--window', state?.window)
@@ -976,7 +1224,7 @@ function cmdKey() {
     if (!xdo) die('xdotool not installed — cannot send input on X11.')
     if (title) spawnSync(xdo, ['search', '--name', title, 'windowactivate', '--sync'], { encoding: 'utf8' })
     const r = spawnSync(xdo, [cmd === 'type' ? 'type' : 'key', '--clearmodifiers', keys], { encoding: 'utf8' })
-    console.log(r.status === 0 ? `sent: ${keys}` : `failed: ${(r.stderr || '').trim()}`)
+    reportKeys(r, keys)
     return
   }
   if (platform() === 'darwin') {
@@ -984,15 +1232,23 @@ function cmdKey() {
       ? `tell application "System Events" to keystroke ${JSON.stringify(keys)}`
       : `tell application "System Events" to key code ${JSON.stringify(keys)}`
     const r = spawnSync('osascript', ['-e', script], { encoding: 'utf8' })
-    console.log(r.status === 0 ? `sent: ${keys}` : `failed: ${(r.stderr || '').trim()}`)
+    reportKeys(r, keys)
     return
   }
   const psExe = isWSL() ? 'powershell.exe' : 'powershell'
-  const activate = title ? `$w=New-Object -ComObject WScript.Shell; $w.AppActivate('${title}'); Start-Sleep -m 300;` : ''
+  // AppActivate matches exact/prefix/suffix ONLY — not mid-title substring
+  // (unlike shot's matcher). "Unity" against "My project (2) - … - Unity 6.5
+  // <DX11>" fails; worse, with Unity Hub open it matches the HUB (prefix) and
+  // sends keys there. So: warn loudly on False — keys still go to whatever is
+  // focused, and the model should know its targeting did not land.
+  const tEsc = title ? String(title).replace(/'/g, "''") : title
+  const activate = title
+    ? `$w=New-Object -ComObject WScript.Shell; if(-not $w.AppActivate('${tEsc}')){[Console]::Error.WriteLine('AppActivate [${tEsc}] failed - matches exact/prefix/suffix only; keys go to the focused window');} Start-Sleep -m 300;`
+    : ''
   const r = spawnSync(psExe, ['-NoProfile', '-Command',
     `${activate} Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${keys.replace(/'/g, "''")}')`,
   ], { encoding: 'utf8' })
-  console.log(r.status === 0 ? `sent: ${keys}` : `failed: ${(r.stderr || '').trim()}`)
+  reportKeys(r, keys)
 }
 
 const sleepAsync = (ms) => new Promise((r) => setTimeout(r, ms))

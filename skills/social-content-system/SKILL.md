@@ -11,6 +11,16 @@ If that skill hasn't been applied yet in this conversation, apply it first.
 Need 32 headlines / a month of angles first? Use `content-matrix`, then come
 back here with one cell. Need a graphic after the draft? Use `social-visuals`.
 
+## Discussion default
+
+Follow repo `DISCUSSION-MODE.md`. Mentor, not a document generator.
+
+Until Ali says draft / نفّذ / go:
+
+- Offer **2–3** hook formulas (names + one-line angle each), then **one** question
+- Do not dump the 20-formula catalog or a full post
+- Do not write Instagram/Reel unless asked
+
 ## Workflow: one idea → multi-platform output
 
 ### Step 1 — Capture the source idea
@@ -25,13 +35,24 @@ Before writing anything, verify:
 - Does it avoid confidential client/employer specifics?
 If any check fails, say so and ask how to adjust before drafting.
 
+### Step 2b — Pick a hook formula
+Use [references/hook-formulas.md](references/hook-formulas.md) (F1–F20).
+Shortlist 2–3 that fit the pillar and the goal (comments / saves / likes).
+
+Rules for every LinkedIn hook:
+- Line 1 is a statement or a number, never a question
+- Prefer a truthful number or named fact in the first 1–2 lines
+- Pay off teasers within 2 lines; no clickbait or "what nobody tells you"
+- Skip F6 (comment-gate) unless Ali explicitly wants a lead magnet
+
 ### Step 3 — Draft platform-native versions (not one post copy-pasted)
 
 **LinkedIn** (primary platform for this audience):
 - First-person, insight-led, one clear point per post
-- Hook in first 1-2 lines (curiosity or contrarian angle, never clickbait)
-- 150-300 words, short paragraphs, no hashtag spam (3-5 max, relevant only)
+- Fill the chosen formula skeleton; keep Ali's voice from `personal-brand`
+- 150–300 words, short paragraphs, no hashtag spam (3–5 max, relevant only)
 - End with a genuine question or a stated trade-off, not "thoughts?" filler
+- Present as: formula used, hook, body, gap flags
 
 **Instagram** (secondary, visual-first):
 - Carousel: 5-8 slides, one idea per slide, slide 1 = hook, last slide =
@@ -63,8 +84,8 @@ If Ali wants a graphic, carousel images, or a quote card, hand off to
 ## What this skill does NOT do
 - Does not publish anything — output is draft text/scripts only
 - Does not fabricate engagement hooks based on fake urgency or false claims
+- Does not run an AI-detection "humanizer" pass
 - Does not repost the same sentence structure across platforms — every
   platform gets native-feeling content
-- Does not generate a 32-cell idea grid (`content-matrix`) or Gemini/HTML
-  graphics (`social-visuals`)
+- Does not generate a 32-cell idea grid or a 7-day calendar (`content-matrix`)
 - Does not optimize the LinkedIn profile (`linkedin-optimizer`)
