@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Install agent-skills globally via symlinks into Cursor, Claude Code,
+# Install agent-skills globally via symlinks into Cursor, Claude Code, Codex,
 # and OpenCode-compatible dirs (~/.agents/skills).
 # OpenCode has no skills dir of its own; it loads ~/.claude/skills then ~/.agents/skills.
+# T3 Code reuses the same user skill roots as Claude Code and Codex (~/.claude/skills, ~/.codex/skills).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,7 +11,11 @@ REPO_SKILLS="$REPO_ROOT/skills"
 CURSOR_SKILLS="${CURSOR_SKILLS_DIR:-$HOME/.cursor/skills}"
 CLAUDE_SKILLS="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 AGENTS_SKILLS="${AGENTS_SKILLS_DIR:-$HOME/.agents/skills}"
+CODEX_SKILLS="${CODEX_SKILLS_DIR:-$HOME/.codex/skills}"
 CODEGPT_SKILLS="${CODEGPT_SKILLS_DIR:-$HOME/.codegpt/skills}"
+
+# Never remove tool-managed dirs when pruning stale symlinks (Codex ships ~/.codex/skills/.system).
+PRESERVE_SKILL_DIR_NAMES=(_archive references .system)
 
 link_path() {
   local src="$1"
@@ -47,7 +52,7 @@ install_into() {
     for entry in "$target"/*; do
       [[ -e "$entry" || -L "$entry" ]] || continue
       name="$(basename "$entry")"
-      if [[ "$name" == "references" ]]; then
+      if [[ " ${PRESERVE_SKILL_DIR_NAMES[*]} " == *" $name "* ]]; then
         continue
       fi
       if [[ ! -e "$REPO_SKILLS/$name" ]]; then
@@ -85,6 +90,7 @@ echo
 install_into "$CURSOR_SKILLS" 1
 install_into "$CLAUDE_SKILLS" 0
 install_into "$AGENTS_SKILLS" 0
+install_into "$CODEX_SKILLS" 0
 install_codegpt
 
 # Discussion-mode instructions (Claude + OpenCode)
@@ -101,3 +107,4 @@ echo "Verify:"
 echo "  ls -la $CURSOR_SKILLS | head"
 echo "  ls -la $CLAUDE_SKILLS | head"
 echo "  ls -la $AGENTS_SKILLS | head"
+echo "  ls -la $CODEX_SKILLS | head"

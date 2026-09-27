@@ -51,7 +51,7 @@ See **[SYNC.md](SYNC.md)** for paths, platform notes, and what does not sync.
 
 | Item | Repo path | Installed to |
 |------|-----------|--------------|
-| Skills (active; skips `_archive/`) | `skills/` | `~/.cursor/skills/`, `~/.claude/skills/`, `~/.agents/skills/` (symlinks) |
+| Skills (active; skips `_archive/`) | `skills/` | `~/.cursor/skills/`, `~/.claude/skills/`, `~/.agents/skills/`, `~/.codex/skills/` (symlinks). OpenCode + **T3 Code** read Claude/Codex/agents paths; CodeGPT gets `browser-automation` + `game-development` only. |
 | Discussion mode | `DISCUSSION-MODE.md` | `~/.agents/DISCUSSION-MODE.md` |
 | Slash commands | `commands/` | `~/.cursor/commands/` |
 | Prompts | `prompts/` | `~/.cursor/prompts/` |

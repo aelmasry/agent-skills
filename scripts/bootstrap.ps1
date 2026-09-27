@@ -36,7 +36,7 @@ function Install-Skills([string]$Target, [bool]$WithReferences) {
     Write-Host "  -> $($_.Name)"
   }
   Get-ChildItem $Target -ErrorAction SilentlyContinue | ForEach-Object {
-    if ($_.Name -eq "references") { return }
+    if ($_.Name -in @("references", ".system")) { return }
     $canonical = Join-Path $RepoRoot "skills" $_.Name
     if (-not (Test-Path $canonical)) {
       Remove-Item $_.FullName -Force -Recurse -ErrorAction SilentlyContinue
@@ -58,6 +58,8 @@ Write-Host "Skills -> Claude Code"
 Install-Skills (Join-Path $env:USERPROFILE ".claude\skills") $false
 Write-Host "Skills -> OpenCode / agents"
 Install-Skills (Join-Path $env:USERPROFILE ".agents\skills") $false
+Write-Host "Skills -> Codex (T3 Code Codex threads use the same path)"
+Install-Skills (Join-Path $env:USERPROFILE ".codex\skills") $false
 Write-Host ""
 
 # 2) Commands + prompts
